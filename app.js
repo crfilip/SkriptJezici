@@ -133,14 +133,20 @@ app.controller('login_modal_instance_ctrl', function ($scope, $uibModalInstance,
         console.log('email:'+$scope.email+' pass:'+$scope.password);
 
         //ovde proveri da li korisnik postoji
-        $uibModalInstance.close();
 
-        $uibModal.open({
-            templateUrl: 'login_success.html',
-            controller: 'login_success_ctrl'
-            
-        })
-       
+        $http.post("db_login.php", {'email' :$scope.email, 'password':$scope.password})
+            .success(function () {
+                console.log('usao');
+
+                $rootScope.nickname = $scope.nickname;
+                $uibModalInstance.close();
+
+                $uibModal.open({
+                    templateUrl: 'login_success.html',
+                    controller: 'login_success_ctrl'
+
+                })
+            })
 
 
     };
@@ -181,5 +187,5 @@ app.controller('register_ctrl', function ($scope, $http, $uibModalInstance, $uib
             })
             
 
-    }
+    };
 });
