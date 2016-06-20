@@ -115,7 +115,7 @@ app.controller('login_modal_ctrl',function ($scope, $uibModal, $rootScope, $stat
 
 });
 
-app.controller('login_modal_instance_ctrl', function ($scope, $uibModalInstance, $uibModal, $rootScope, $state) {
+app.controller('login_modal_instance_ctrl', function ($scope, $http, $uibModalInstance, $uibModal, $rootScope, $state) {
     
     
     $scope.register = function () {
@@ -132,22 +132,27 @@ app.controller('login_modal_instance_ctrl', function ($scope, $uibModalInstance,
         
         console.log('email:'+$scope.email+' pass:'+$scope.password);
 
-        //ovde proveri da li korisnik postoji
-
         $http.post("db_login.php", {'email' :$scope.email, 'password':$scope.password})
-            .success(function () {
-                console.log('usao');
+            .then(function (a) {
 
-                $rootScope.nickname = $scope.nickname;
-                $uibModalInstance.close();
+                if(a.data=="wrong")
+                {
+                    $scope.warning="Wrong credentials";
+                }
+                else {
+                    console.log(a.data);
 
-                $uibModal.open({
-                    templateUrl: 'login_success.html',
-                    controller: 'login_success_ctrl'
+                    $rootScope.nickname = a.data;
+                    
+                    $uibModalInstance.close();
 
-                })
+                    $uibModal.open({
+                        templateUrl: 'login_success.html',
+                        controller: 'login_success_ctrl'
+
+                    })
+                }
             })
-
 
     };
 
