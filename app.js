@@ -123,6 +123,7 @@ app.controller('login_modal_instance_ctrl', function ($scope, $uibModalInstance,
     $scope.register = function () {
         $uibModalInstance.close();
 
+        //asdw
         $uibModal.open({
             templateUrl: 'register.html',
             controller: 'register_ctrl'
