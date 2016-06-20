@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="angular-ui-router.js" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/LostAndFound_build/angular.js" />
+        <item url="file://$PROJECT_DIR$/LostAndFound_build/angular-ui-router.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/LostAndFound_build/angular.js" />
+      <root url="file://$PROJECT_DIR$/LostAndFound_build/angular-ui-router.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

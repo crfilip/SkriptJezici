@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="ui-bootstrap-tpls-1.3.2.js" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/LostAndFound_build/ui-bootstrap-tpls-1.3.2.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/LostAndFound_build/ui-bootstrap-tpls-1.3.2.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,17 @@
+<div >
+    <div >
+        <button class="btn btn-danger btn input-block-level form-control" ng-click=" isCollapsed_F1 = !isCollapsed_F1">FOUND THINGS</button>
+        <div uib-collapse="!isCollapsed_F1">
+            <div class="well well-lg"> <div ui-view="foundSomething_view"></div> </div>
+        </div>
+    </div>
+</div>
+<hr>
+<div >
+    <div >
+        <button class="btn btn-danger btn input-block-level form-control" ng-click=" isCollapsed_F2 = !isCollapsed_F2">FOUND SOMETHING</button>
+        <div uib-collapse="!isCollapsed_F2">
+            <div class="well well-lg"> <div ui-view="foundThings_view"></div> </div>
+        </div>
+    </div>
+</div>
