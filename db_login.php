@@ -8,7 +8,7 @@ $password = $dbhandle->real_escape_string($data->password);
 $query = "SELECT nickname FROM users WHERE email='$email' AND password='$password'";
 $result = $dbhandle->query($query);
 $row = $result->fetch_assoc();
-if($row === null)echo"wrong";
+if($row === null) echo"wrong";
 echo $row["nickname"];
 
 $dbhandle->close();
