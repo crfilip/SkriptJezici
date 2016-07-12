@@ -8,7 +8,11 @@ $nickname = $dbhandle->real_escape_string($data->nickname);
 $query = "INSERT INTO users VALUES ('$email', '$password', '$nickname')";
 
 $dbhandle->query($query);
-
+if($dbhandle->error){
+    echo "Email in use";
+}else{
+    echo "Registration succesful";
+}
 $dbhandle->close();
 
 ?>

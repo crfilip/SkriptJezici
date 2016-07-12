@@ -149,10 +149,11 @@ app.controller('login_modal_instance_ctrl', function (Session,$scope, $http, $ui
                     $scope.warning="Wrong credentials";
                 }
                 else {
-                    console.log(user.data);
-                    Session.set('user',user.data);
+                    var fields = user.data.split(" ");
+                    console.log(fields[0]);
+                    Session.set('user',fields[1]);
                     $rootScope.log = 'Log out';
-                    $rootScope.nickname = user.data;
+                    $rootScope.nickname = fields[0];
                     $uibModalInstance.close();
 
                     $uibModal.open({
@@ -180,22 +181,20 @@ app.controller('login_success_ctrl', function ($scope, $uibModalInstance) {
     }
 });
 
-app.controller('register_ctrl', function (Session,$scope, $http, $uibModalInstance, $uibModal, $rootScope) {
+app.controller('register_ctrl', function ($scope, $http, $uibModalInstance, $uibModal, $rootScope) {
 
     $scope.register_submit = function () {
 
         console.log('email: '+$scope.email+' pass: '+$scope.password+' nickname: '+$scope.nickname);
         
         $http.post("db_insert.php", {'email' :$scope.email, 'password':$scope.password, 'nickname':$scope.nickname})
-            .success(function () {
+            .then(function (data) {
+                $rootScope.registracija = data.data;
 
-                Session.set('user',user.data);
-                $rootScope.log = 'Log out';
-                 $rootScope.nickname = $scope.nickname;
                 $uibModalInstance.close();
 
                 $uibModal.open({
-                    templateUrl: 'login_success.html',
+                    templateUrl: 'register_success.html',
                     controller: 'login_success_ctrl'
 
                 })

@@ -1,4 +1,5 @@
 <?php
+
 include "db_connect.php";
 
 $data = json_decode(file_get_contents("php://input"));
@@ -8,9 +9,17 @@ $password = $dbhandle->real_escape_string($data->password);
 $query = "SELECT nickname FROM users WHERE email='$email' AND password='$password'";
 $result = $dbhandle->query($query);
 $row = $result->fetch_assoc();
-if($row === null) echo"wrong";
-else
-echo $row["nickname"];
+if($row === null){
+ echo"wrong";
+ }
+else{
+    session_start();
+    $_SESSION['user']= uniqid();
+    echo $row["nickname"];
+    echo " ";
+    echo  $_SESSION['user'];
+}
+
 
 $dbhandle->close();
 
