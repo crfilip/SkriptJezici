@@ -9,6 +9,7 @@ $query = "SELECT nickname FROM users WHERE email='$email' AND password='$passwor
 $result = $dbhandle->query($query);
 $row = $result->fetch_assoc();
 if($row === null) echo"wrong";
+else
 echo $row["nickname"];
 
 $dbhandle->close();

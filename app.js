@@ -8,8 +8,6 @@ var app = angular.module('LFapp', ['ui.router','ui.bootstrap', 'ngAnimate']);
 
 app.config(function ($stateProvider, $urlRouterProvider) {
 
-
-
     $urlRouterProvider.otherwise('/home');
 
 
@@ -59,11 +57,16 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     
 });
 
-app.controller('main_ctrl',function ($scope, $rootScope) {
+app.controller('main_ctrl',function (Session,$scope, $rootScope) {
+    var sesija = Session.get('user');
+    if(sesija==null){
+        $rootScope.log = 'Log in';
+    }else{
+        $rootScope.log = 'Log out';
+    }
 
     $rootScope.previousState;
     $rootScope.currentState ;
-
     $rootScope.$on('$stateChangeStart', function(event, to, toParams, from) {
 
         $rootScope.previousState = from.name;
@@ -99,11 +102,13 @@ app.controller('collapse_ctrl_F2', function ($scope) {
 
 });
 
-app.controller('login_modal_ctrl',function ($scope, $uibModal, $rootScope, $state) {
+app.controller('login_modal_ctrl',function (Session,$scope, $uibModal, $rootScope, $state) {
 
+    var sesija = Session.get('user');
 
-    console.log('Current state2:'+$rootScope.previousState);
-    $state.go($rootScope.previousState);
+    if(sesija==null){
+        console.log(sesija);
+        $state.go($rootScope.previousState);
 
         $uibModal.open({
 
@@ -111,13 +116,18 @@ app.controller('login_modal_ctrl',function ($scope, $uibModal, $rootScope, $stat
             controller: 'login_modal_instance_ctrl'
 
         });
+    }else{
+        Session.kill('user');
+        $rootScope.log = 'Log in';
+    }
+
 
 
 });
 
-app.controller('login_modal_instance_ctrl', function ($scope, $http, $uibModalInstance, $uibModal, $rootScope, $state) {
-    
-    
+app.controller('login_modal_instance_ctrl', function (Session,$scope, $http, $uibModalInstance, $uibModal, $rootScope, $state) {
+
+
     $scope.register = function () {
         $uibModalInstance.close();
 
@@ -131,19 +141,18 @@ app.controller('login_modal_instance_ctrl', function ($scope, $http, $uibModalIn
     $scope.log_in = function () {
         
         console.log('email:'+$scope.email+' pass:'+$scope.password);
-
         $http.post("db_login.php", {'email' :$scope.email, 'password':$scope.password})
-            .then(function (a) {
+            .then(function (user) {
 
-                if(a.data=="wrong")
+                if(user.data=="wrong")
                 {
                     $scope.warning="Wrong credentials";
                 }
                 else {
-                    console.log(a.data);
-
-                    $rootScope.nickname = a.data;
-                    
+                    console.log(user.data);
+                    Session.set('user',user.data);
+                    $rootScope.log = 'Log out';
+                    $rootScope.nickname = user.data;
                     $uibModalInstance.close();
 
                     $uibModal.open({
@@ -171,7 +180,7 @@ app.controller('login_success_ctrl', function ($scope, $uibModalInstance) {
     }
 });
 
-app.controller('register_ctrl', function ($scope, $http, $uibModalInstance, $uibModal, $rootScope) {
+app.controller('register_ctrl', function (Session,$scope, $http, $uibModalInstance, $uibModal, $rootScope) {
 
     $scope.register_submit = function () {
 
@@ -179,8 +188,9 @@ app.controller('register_ctrl', function ($scope, $http, $uibModalInstance, $uib
         
         $http.post("db_insert.php", {'email' :$scope.email, 'password':$scope.password, 'nickname':$scope.nickname})
             .success(function () {
-                console.log('usao');
-                
+
+                Session.set('user',user.data);
+                $rootScope.log = 'Log out';
                  $rootScope.nickname = $scope.nickname;
                 $uibModalInstance.close();
 
@@ -192,5 +202,19 @@ app.controller('register_ctrl', function ($scope, $http, $uibModalInstance, $uib
             })
             
 
+    };
+});
+
+app.factory('Session', function($http) {
+
+    return{
+        set:function(key,value){
+            return sessionStorage.setItem(key,value);
+        },
+        get:function(key){
+            return sessionStorage.getItem(key);
+        },kill:function(key){
+            return sessionStorage.removeItem(key);
+        }
     };
 });
