@@ -5,7 +5,6 @@
 var app = angular.module('LFapp', ['ui.router','ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps']);
 
 
-
 app.config(function ($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/home');
@@ -59,6 +58,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 
 app.controller('main_ctrl',function (Session,$scope, $rootScope) {
     var sesija = Session.get('user');
+    $rootScope.showMap=false;
     if(sesija==null){
         $rootScope.log = 'Log in';
     }else{
@@ -75,6 +75,11 @@ app.controller('main_ctrl',function (Session,$scope, $rootScope) {
         console.log('Current state:'+$rootScope.currentState);
     });
 
+    // ima ng-if na map elementu(u foundSomething.html) koji zavisi od showMap, prikazuje je ili ne, odnosno kad je true iscrtava ispocetka i ne bude sivo
+
+    $scope.prikaziMapu = function (){
+        $rootScope.showMap=!$rootScope.showMap;
+    }
 });
 app.controller( 'collapse_ctrl_L1', function ($scope) {
 
@@ -89,14 +94,10 @@ app.controller('collapse_ctrl_L2', function ($scope) {
 
 });
 
-app.controller('collapse_ctrl_F1', function ($scope) {
-
+app.controller('collapse_ctrl_F1', function ($scope,$rootScope) {
 
     $scope.isCollapsed_F1 = false;
-
     $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
-
-
     //citas kategorije iz output[typeKey], sranje radi dinamicki ali nmze da se izbrise ako se unchekira tj ostaje u outputsima
     //probaj u consol logu
     $scope.outputs = {};
@@ -113,8 +114,6 @@ app.controller('collapse_ctrl_F1', function ($scope) {
 
 
     };
-
-
 
 });
 

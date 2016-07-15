@@ -39,9 +39,8 @@
                 <textarea class="form-control" rows="5" id="comment"></textarea>
             </div>
 
-            <div  >
-
-            <ui-gmap-google-map  center='map.center' zoom='map.zoom' draggable="true" options="options">
+            <div >
+            <ui-gmap-google-map ng-if="showMap" center='map.center' zoom='map.zoom' draggable="true" options="options">
                 <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
                 </ui-gmap-marker>
 
