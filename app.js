@@ -2,7 +2,7 @@
  * Created by Filip on 5/18/2016.
  */
 
-var app = angular.module('LFapp', ['ui.router','ui.bootstrap', 'ngAnimate']);
+var app = angular.module('LFapp', ['ui.router','ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps']);
 
 
 
@@ -76,7 +76,7 @@ app.controller('main_ctrl',function (Session,$scope, $rootScope) {
     });
 
 });
-app.controller('collapse_ctrl_L1', function ($scope) {
+app.controller( 'collapse_ctrl_L1', function ($scope) {
 
     $scope.isCollapsed_L1 = false;
     
@@ -91,7 +91,30 @@ app.controller('collapse_ctrl_L2', function ($scope) {
 
 app.controller('collapse_ctrl_F1', function ($scope) {
 
+
     $scope.isCollapsed_F1 = false;
+
+    $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
+
+
+    //citas kategorije iz output[typeKey], sranje radi dinamicki ali nmze da se izbrise ako se unchekira tj ostaje u outputsima
+    //probaj u consol logu
+    $scope.outputs = {};
+    $scope.inputs = {
+        'category': ['electronics','clothing','pets','drugs','other']
+    };
+    $scope.setOutput = function(typeKey, $index, value) {
+        $scope.outputs[typeKey] = $scope.outputs[typeKey] || [];
+        $scope.outputs[typeKey][$index] = value;
+        console.log('itemz:'+ $scope.outputs[typeKey]);
+    };
+
+    $scope.found_something = function (){
+
+
+    };
+
+
 
 });
 

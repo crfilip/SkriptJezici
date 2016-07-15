@@ -1,13 +1,57 @@
+<div>
+    <div>
+        <h3 >Lost Something?</h3>
+    </div>
+    </br>
+    <form ng-submit="found_something()" >
+        <div>
 
-    <h3>Found Something</h3>
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sit amet massa mi. Aenean quis erat tincidunt, vestibulum mauris nec, dignissim dolor. Morbi non pulvinar magna. Pellentesque quis quam sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam maximus rhoncus libero, et tincidunt libero scelerisque sed. Maecenas cursus eget nisl nec interdum.
+            <div class="form-group">
+                <label>Item Name</label>
+                <input type="text" class="navbar-form" placeholder="Enter item name" ng-model="itemName" required/>
+            </div>
 
-        Donec fringilla venenatis nunc eget imperdiet. Ut pretium convallis consequat. Aenean fringilla nunc tempor feugiat facilisis. Donec odio urna, scelerisque non convallis consectetur, consequat at libero. Phasellus vitae rutrum nisi. Quisque sollicitudin massa rutrum augue auctor molestie. Morbi at lectus sapien. Morbi tristique efficitur purus convallis viverra. Mauris neque libero, accumsan vitae convallis eu, posuere in nisi. Donec a efficitur odio. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent porta elit metus, vel malesuada ipsum varius in.
 
-        Nullam id erat sit amet diam feugiat ornare. Phasellus sed lacus purus. Sed a sem odio. Proin ullamcorper, orci eget tempor sodales, est massa rhoncus orci, at auctor purus libero in neque. Nulla facilisi. Morbi pretium ullamcorper congue. Vivamus ac vestibulum ante, eu interdum tellus. Nam velit dui, finibus vitae vulputate in, efficitur sit amet tellus.
+            <div class="form-group">
+                <label>Category</label>
+                </br>
+                <ul>
+                    <li ng-repeat="(typeKey, typeVal) in inputs">
+                        <span>Select one or more: </span>
+                        <ul>
+                            <li ng-repeat="value in typeVal">
+                                <label>{{value}}
+                                    <input
+                                            type="checkbox"
+                                            ng-model="x"
+                                            ng-change="setOutput(typeKey, $index, value)"
+                                    >
+                                </label>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
 
-        Morbi quis sem nec nulla lobortis dapibus eu at mauris. Suspendisse aliquam nibh enim, eget dignissim ipsum mollis nec. Donec velit est, congue in finibus nec, pellentesque nec lorem. Vivamus fermentum, libero quis consequat tincidunt, turpis sem interdum ex, sed fringilla nunc nulla quis libero. Fusce aliquet nunc feugiat, euismod risus at, dictum enim. Quisque accumsan augue et lacus tempus, a euismod ipsum luctus. Fusce sapien lacus, blandit eget iaculis ut, eleifend eget nunc. Suspendisse elementum cursus tortor vel dignissim. Curabitur vitae justo ac nisl euismod pulvinar sed sed ante. Cras eu mauris ac dolor eleifend posuere vel vitae massa. In hac habitasse platea dictumst. Donec mattis blandit quam, sagittis tempor ex pretium vitae. Maecenas sem tortor, eleifend eu orci in, fermentum mollis diam.
 
-        Nulla vehicula est nisl, ut laoreet velit efficitur nec. Praesent vel tincidunt lorem, ac aliquam massa. Praesent auctor porta tellus quis aliquet. Ut metus elit, dignissim quis blandit sit amet, suscipit consequat tellus. Sed nisl ex, aliquam at lectus quis, consequat rutrum massa. Pellentesque varius molestie urna non vehicula. Pellentesque tellus odio, luctus ut nulla ac, iaculis fringilla massa. Curabitur sodales tincidunt odio, et rhoncus sapien bibendum id. Aliquam ac urna vitae ipsum tempus sodales.
-    </p>
+            <div class="form-group">
+                <label for="comment">Description</label>
+                <textarea class="form-control" rows="5" id="comment"></textarea>
+            </div>
+
+            <div  >
+
+            <ui-gmap-google-map  center='map.center' zoom='map.zoom' draggable="true" options="options">
+                <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+                </ui-gmap-marker>
+
+            </ui-gmap-google-map>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary center-block" >Submit Finding</button>
+
+    </form>
+
+
+</div>
