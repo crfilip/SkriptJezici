@@ -94,10 +94,63 @@ app.controller('collapse_ctrl_L2', function ($scope) {
 
 });
 
-app.controller('collapse_ctrl_F1', function ($scope,$rootScope) {
+app.controller('collapse_ctrl_F1', function ($scope) {
 
     $scope.isCollapsed_F1 = false;
-    $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
+    $scope.map = { center: { latitude: 44.8206, longitude: 20.4622 }, zoom: 8 };
+
+    $scope.marker = {
+        id: 0,
+        coords: {
+            latitude: 44.8206,
+            longitude: 20.4622
+        },
+        options: { draggable: true },
+        events: {
+            dragend: function (marker, eventName, args) {
+                $log.log('marker dragend');
+                var lat = marker.getPosition().lat();
+                var lon = marker.getPosition().lng();
+                $log.log(lat);
+                $log.log(lon);
+
+                $scope.marker.options = {
+                    draggable: true,
+                    labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
+                    labelAnchor: "100 0",
+                    labelClass: "marker-labels"
+                };
+            }
+        }
+    };
+
+    $scope.searchbox = {
+        template:'searchbox.tpl.html',
+        events:{
+            places_changed: function (searchBox) {
+                var places = searchBox.getPlaces();
+                var place = places[0];
+                $scope.map = {
+                    center:{
+                        latitude:place.geometry.location.lat(),
+                        longitude:place.geometry.location.lng()
+                    },
+                    zoom:10
+                };
+
+                // refresh the marker
+                $scope.marker = {
+                    id:0,
+                    options:{ draggable:false },
+                    coords:{
+                        latitude:place.geometry.location.lat(),
+                        longitude:place.geometry.location.lng()
+                    }
+                };
+            }
+        }
+    };
+
     //citas kategorije iz output[typeKey], sranje radi dinamicki ali nmze da se izbrise ako se unchekira tj ostaje u outputsima
     //probaj u consol logu
     $scope.outputs = {};

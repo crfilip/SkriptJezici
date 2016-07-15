@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="600a34f3-32ee-4861-a119-c4056983f395" name="Default" comment="Izmena nedoslednosti found i lost partiala">
+    <list default="true" id="600a34f3-32ee-4861-a119-c4056983f395" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/partial-home-found-foundSomething.html" afterPath="$PROJECT_DIR$/partial-home-found-foundSomething.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/partial-home-found.html" afterPath="$PROJECT_DIR$/partial-home-found.html" />
     </list>
     <ignored path="untitled1.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="77" column="52" selection-start-line="77" selection-start-column="52" selection-end-line="77" selection-end-column="52" />
+            <state relative-caret-position="156">
+              <caret line="105" column="30" selection-start-line="105" selection-start-column="30" selection-end-line="105" selection-end-column="30" />
               <folding>
                 <element signature="e#0#41#0" expanded="false" />
               </folding>
@@ -48,7 +47,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="176">
@@ -61,8 +60,8 @@
       <file leaf-file-name="partial-home-found-foundSomething.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/partial-home-found-foundSomething.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="41" column="17" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
+            <state relative-caret-position="425">
+              <caret line="42" column="16" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="138" />
               <folding />
             </state>
           </provider>
@@ -123,9 +122,9 @@
         <option value="$PROJECT_DIR$/partial-home-lost.html" />
         <option value="$PROJECT_DIR$/LostAndFound_build/css/styleCss.css" />
         <option value="$PROJECT_DIR$/partial-home-found.html" />
-        <option value="$PROJECT_DIR$/app.js" />
-        <option value="$PROJECT_DIR$/partial-home-found-foundSomething.html" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/partial-home-found-foundSomething.html" />
+        <option value="$PROJECT_DIR$/app.js" />
       </list>
     </option>
   </component>
@@ -345,7 +344,7 @@
       <workItem from="1466509418454" duration="6898000" />
       <workItem from="1468326994484" duration="15288000" />
       <workItem from="1468503406558" duration="597000" />
-      <workItem from="1468586062462" duration="10612000" />
+      <workItem from="1468586062462" duration="15401000" />
     </task>
     <task id="LOCAL-00001" summary="TESTING">
       <created>1466509567376</created>
@@ -375,11 +374,18 @@
       <option name="project" value="LOCAL" />
       <updated>1468361485372</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Mapa vise nije siva">
+      <created>1468598451427</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1468598451427</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="109486000" />
+    <option name="totallyTimeSpent" value="114275000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -423,7 +429,8 @@
     <MESSAGE value="Pracenje sesije odradjeno" />
     <MESSAGE value="Pracenje sesije odradjeno, dorada :D" />
     <MESSAGE value="Izmena nedoslednosti found i lost partiala" />
-    <option name="LAST_COMMIT_MESSAGE" value="Izmena nedoslednosti found i lost partiala" />
+    <MESSAGE value="Mapa vise nije siva" />
+    <option name="LAST_COMMIT_MESSAGE" value="Mapa vise nije siva" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -756,13 +763,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
+    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="77" column="52" selection-start-line="77" selection-start-column="52" selection-end-line="77" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="176">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -776,17 +781,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/partial-home-found-foundSomething.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="41" column="17" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
+        <state relative-caret-position="425">
+          <caret line="42" column="16" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="138" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="156">
+          <caret line="105" column="30" selection-start-line="105" selection-start-column="30" selection-end-line="105" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#41#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
