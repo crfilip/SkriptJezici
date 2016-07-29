@@ -82,28 +82,55 @@ app.controller('main_ctrl',function (Session,$scope, $rootScope) {
     });
 
     // ima ng-if na map elementu(u foundSomething.html) koji zavisi od showMap, prikazuje je ili ne, odnosno kad je true iscrtava ispocetka i ne bude sivo
+    //funkcije za preload i cuvanje elemenata kao sto su showMap i collapse vrenosti, i sta god bude trebalo
+    $scope.load_foundThings = function () {
 
-    $scope.prikaziMapu_found = function (){
-        $rootScope.showMap_found=!$rootScope.showMap_found;
+        $scope.isCollapsed_F1 = !$scope.isCollapsed_F1;
+        console.log("iscollaps "+$scope.isCollapsed_F1);
 
-    }
-    $scope.prikaziMapu_lost = function (){
-        $rootScope.showMap_lost=!$rootScope.showMap_lost;
+    };
+    $scope.load_foundSomething = function (){
 
-    }
+        $scope.isCollapsed_F2 = !$scope.isCollapsed_F2;
+
+        if($scope.isCollapsed_F2)$rootScope.showMap_found=true;
+        else $rootScope.showMap_found=false;
+
+        console.log("showmap_lost "+$rootScope.showMap_lost);
+        console.log("showmap_found "+$rootScope.showMap_found);
+
+    };
+
+    $scope.load_lostThings = function (){
+
+        $scope.isCollapsed_L1 = !$scope.isCollapsed_L1;
+        console.log("iscollaps "+$scope.isCollapsed_L1);
+    };
+    $scope.load_lostSomething = function (){
+
+        $scope.isCollapsed_L2 = !$scope.isCollapsed_L2;
+
+        if($scope.isCollapsed_L2)$rootScope.showMap_lost=true;
+        else $rootScope.showMap_lost=false;
+
+
+        console.log("showmap_lost "+$rootScope.showMap_lost);
+        console.log("showmap_found "+$rootScope.showMap_found);
+        console.log("iscollaps "+$scope.isCollapsed_L2);
+
+    };
 
 });
 app.controller( 'collapse_ctrl_L1', function ($scope) {
 
-    $scope.isCollapsed_L1 = false;
+
     
 });
 
 
 app.controller('collapse_ctrl_L2', function ($scope) {
 
-  
-    $scope.isCollapsed_L2 = false;
+
 
 
     $scope.map = { center: { latitude: 44.8206, longitude: 20.4622 }, zoom: 8 };
@@ -192,7 +219,7 @@ app.controller('collapse_ctrl_L2', function ($scope) {
 
 app.controller('collapse_ctrl_F1', function ($scope) {
 
-    $scope.isCollapsed_F1 = false;
+
 
 
 });
@@ -201,7 +228,7 @@ app.controller('collapse_ctrl_F1', function ($scope) {
 app.controller('collapse_ctrl_F2', function ($scope) {
 
 
-    $scope.isCollapsed_F2 = false;
+
 
 
 
@@ -306,6 +333,12 @@ app.controller('login_modal_ctrl',function (Session,$scope, $uibModal, $rootScop
     }else{
         Session.kill('user');
         $rootScope.log = 'Log in';
+        $state.go($rootScope.previousState);
+        $uibModal.open({
+            templateUrl: 'logout_success.html',
+            controller: 'logout_success_ctrl'
+
+        })
     }
 
 
@@ -361,6 +394,13 @@ app.controller('login_modal_instance_ctrl', function (Session,$scope, $http, $ui
 });
 
 app.controller('login_success_ctrl', function ($scope, $uibModalInstance) {
+
+    $scope.exit = function () {
+
+        $uibModalInstance.close();
+    }
+});
+app.controller('logout_success_ctrl', function ($scope, $uibModalInstance) {
 
     $scope.exit = function () {
 
