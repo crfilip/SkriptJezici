@@ -1,14 +1,14 @@
 <div>
     <div>
-        <h3 >Lost Something?</h3>
+        <h3><strong>You can report your findings in a form below</strong></h3>
     </div>
     </br>
-    <form ng-submit="found_something()" >
+    <form ng-submit="found_something()" onkeypress="return event.keyCode != 13;">
         <div>
 
             <div class="form-group">
                 <label>Item Name</label>
-                <input type="text" class="navbar-form" placeholder="Enter item name" ng-model="itemName" required/>
+                <input type="text" class="other-text-form" placeholder="Enter item name" ng-model="itemName" required/>
             </div>
 
 
@@ -23,7 +23,7 @@
                                 <label>{{value}}
                                     <input
                                             type="checkbox"
-                                            ng-model="x"
+                                            ng-model="checkValue"
                                             ng-change="setOutput(typeKey, $index, value)"
                                     >
                                 </label>
@@ -40,8 +40,10 @@
             </div>
 
             <div >
+                <label>Mark the location of the finding</label>
+
                 <script type="text/ng-template" id="searchbox.tpl.html"> <input id="search" type="text" placeholder="Search Box"></script>
-            <ui-gmap-google-map ng-if="showMap" center='map.center' zoom='map.zoom' draggable="true" options="options">
+            <ui-gmap-google-map ng-if="showMap_found" center='map.center' zoom='map.zoom' draggable="true" options="options">
                 <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
                 </ui-gmap-marker>
                 <ui-gmap-search-box template="searchbox.template" events="searchbox.events"></ui-gmap-search-box>
@@ -49,8 +51,8 @@
 
             </div>
         </div>
-
-        <button type="submit" class="btn btn-primary center-block" >Submit Finding</button>
+        </br>
+        <button type="submit" class="btn btn-yellow center-block" ><span class="white text-bold">Submit</span></button>
 
     </form>
 

@@ -13,6 +13,7 @@
     <script src="LostAndFound_build/angular-google-maps.min.js"></script>
     <script src="LostAndFound_build/angular-simple-logger.js"></script>
 
+
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
     <script src="app.js"></script>
 
@@ -21,22 +22,19 @@
     <link rel="stylesheet" href="LostAndFound_build/css/styleCss.css">
 
 
-    <style>
-    .navbar { border-radius:0px; }
-    </style>
+
 
 </head>
-<body ng-app="LFapp">
+<body ng-app="LFapp" class="darkgray">
 
     <div class="navbar navbar-inverse" role="navigation">
         <div class="navbar-header">
-            <a class="navbar-brand" ui-sref="#" >Lost and Found</a>
+            <a class="navbar-brand" ui-sref="home" >Lost and Found</a>
         </div>
 
         <ul class="nav navbar-nav">
-            <li><a ui-sref="home" >Home</a> </li>
 
-            <li><a ui-sref="home.logIn" >{{log}}</a> </li>
+            <li><a ui-sref="home.logIn" class="text-bold" >{{log}}</a> </li>
         </ul>
 
 

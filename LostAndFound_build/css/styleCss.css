@@ -47,3 +47,69 @@
       #target {
         width: 345px;
       }
+
+.yellow{
+
+    color:#F7B733;
+}
+.btn-yellow{
+
+    background:#F7B733;
+}
+.darkgray{
+
+    background:#535353;
+}
+ .white{
+
+     color:whitesmoke;
+ }
+.turquoise{
+
+    color:#4ABDAC;
+}
+.orange{
+
+    color:#E24E42;
+}
+.btn-small-width{
+
+    width: 100px;
+}
+.btn-orange-light{
+
+    background:#E24E42;
+}
+.btn-turquoise-light{
+
+    background:#4ABDAC;
+}
+.btn-orange-dark{
+
+    background:#FF5900;
+}
+.btn-turquoise-dark{
+
+    background:#00A874;
+}
+.navbar {
+
+    border-radius:0px;
+
+    }
+
+.btn {
+
+    border-radius:0px;
+
+}
+
+.well{
+
+    border-radius:0px;
+}
+
+.text-bold{
+
+    font-weight: bold;
+}

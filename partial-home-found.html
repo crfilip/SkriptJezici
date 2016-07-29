@@ -1,6 +1,6 @@
 <div >
     <div >
-        <button class="btn btn-danger btn input-block-level form-control" ng-click=" isCollapsed_F1 = !isCollapsed_F1">FOUND THINGS</button>
+        <button class="btn btn-turquoise-light input-block-level form-control" ng-click=" isCollapsed_F1 = !isCollapsed_F1" ><span class="white text-bold" >FOUND THINGS</span></button>
         <div uib-collapse="!isCollapsed_F1">
             <div class="well well-lg"> <div ui-view="foundThings_view"></div> </div>
         </div>
@@ -9,7 +9,7 @@
 <hr>
 <div >
     <div >
-        <button class="btn btn-danger btn input-block-level form-control" ng-click=" isCollapsed_F2 = !isCollapsed_F2;prikaziMapu(); " >FOUND SOMETHING</button>
+        <button class="btn btn-turquoise-light input-block-level form-control" ng-click=" isCollapsed_F2 = !isCollapsed_F2;prikaziMapu_found(); " ><span class="white text-bold">FOUND SOMETHING</span></button>
         <div uib-collapse="!isCollapsed_F2">
             <div class="well well-lg"> <div ui-view="foundSomething_view"></div> </div>
         </div>

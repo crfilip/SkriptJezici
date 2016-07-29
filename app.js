@@ -27,12 +27,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             views: {   
                 '':{ templateUrl : 'partial-home-lost.html'},
 
-                'lostSomething_view@home.lost' : {
-                    templateUrl : 'partial-home-lost-lostSomething.html',
+                'lostThings_view@home.lost' : {
+                    templateUrl : 'partial-home-lost-lostThings.html',
                     controller: 'collapse_ctrl_L1'},
 
-                'lostThings_view@home.lost' :  {
-                    templateUrl : 'partial-home-lost-lostThings.html',
+                'lostSomething_view@home.lost' :  {
+                    templateUrl : 'partial-home-lost-lostSomething.html',
                     controller: 'collapse_ctrl_L2'}
             }
             
@@ -43,12 +43,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             views: {
                 '':{ templateUrl : 'partial-home-found.html'},
 
-                'foundSomething_view@home.found' : {
-                    templateUrl : 'partial-home-found-foundSomething.html',
+                'foundThings_view@home.found' : {
+                    templateUrl : 'partial-home-found-foundThings.html',
                     controller: 'collapse_ctrl_F1'},
 
-                'foundThings_view@home.found' :  {
-                    templateUrl : 'partial-home-found-foundThings.html',
+                'foundSomething_view@home.found' :  {
+                    templateUrl : 'partial-home-found-foundSomething.html',
                     controller: 'collapse_ctrl_F2'}
             }
 
@@ -56,9 +56,15 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     
 });
 
+
+
 app.controller('main_ctrl',function (Session,$scope, $rootScope) {
+
     var sesija = Session.get('user');
-    $rootScope.showMap=false;
+
+    $rootScope.showMap_found=false;
+    $rootScope.showMap_lost=false;
+
     if(sesija==null){
         $rootScope.log = 'Log in';
     }else{
@@ -77,9 +83,15 @@ app.controller('main_ctrl',function (Session,$scope, $rootScope) {
 
     // ima ng-if na map elementu(u foundSomething.html) koji zavisi od showMap, prikazuje je ili ne, odnosno kad je true iscrtava ispocetka i ne bude sivo
 
-    $scope.prikaziMapu = function (){
-        $rootScope.showMap=!$rootScope.showMap;
+    $scope.prikaziMapu_found = function (){
+        $rootScope.showMap_found=!$rootScope.showMap_found;
+
     }
+    $scope.prikaziMapu_lost = function (){
+        $rootScope.showMap_lost=!$rootScope.showMap_lost;
+
+    }
+
 });
 app.controller( 'collapse_ctrl_L1', function ($scope) {
 
@@ -90,13 +102,10 @@ app.controller( 'collapse_ctrl_L1', function ($scope) {
 
 app.controller('collapse_ctrl_L2', function ($scope) {
 
+  
     $scope.isCollapsed_L2 = false;
 
-});
 
-app.controller('collapse_ctrl_F1', function ($scope) {
-
-    $scope.isCollapsed_F1 = false;
     $scope.map = { center: { latitude: 44.8206, longitude: 20.4622 }, zoom: 8 };
 
     $scope.marker = {
@@ -108,11 +117,11 @@ app.controller('collapse_ctrl_F1', function ($scope) {
         options: { draggable: true },
         events: {
             dragend: function (marker, eventName, args) {
-                $log.log('marker dragend');
+                console.log('marker dragged');
                 var lat = marker.getPosition().lat();
                 var lon = marker.getPosition().lng();
-                $log.log(lat);
-                $log.log(lon);
+                console.log(lat);
+                console.log(lon);
 
                 $scope.marker.options = {
                     draggable: true,
@@ -141,7 +150,7 @@ app.controller('collapse_ctrl_F1', function ($scope) {
                 // refresh the marker
                 $scope.marker = {
                     id:0,
-                    options:{ draggable:false },
+                    options:{ draggable:true },
                     coords:{
                         latitude:place.geometry.location.lat(),
                         longitude:place.geometry.location.lng()
@@ -151,29 +160,132 @@ app.controller('collapse_ctrl_F1', function ($scope) {
         }
     };
 
-    //citas kategorije iz output[typeKey], sranje radi dinamicki ali nmze da se izbrise ako se unchekira tj ostaje u outputsima
-    //probaj u consol logu
+
     $scope.outputs = {};
     $scope.inputs = {
-        'category': ['electronics','clothing','pets','drugs','other']
+        'category': ['documents','electronics','clothing','pets','drugs','other']
     };
     $scope.setOutput = function(typeKey, $index, value) {
+
+
         $scope.outputs[typeKey] = $scope.outputs[typeKey] || [];
-        $scope.outputs[typeKey][$index] = value;
-        console.log('itemz:'+ $scope.outputs[typeKey]);
+
+        if($scope.outputs[typeKey][$index] == value){
+
+            $scope.outputs[typeKey][$index] = null;
+
+        }
+        else  $scope.outputs[typeKey][$index] = value;
+
+        console.log('itemz:'+ $scope.outputs[typeKey]+"  $index "+$index+"  value "+value);
     };
 
+    //submit function
     $scope.found_something = function (){
+
+        console.log("SUBMITTED");
 
 
     };
 
 });
 
+app.controller('collapse_ctrl_F1', function ($scope) {
+
+    $scope.isCollapsed_F1 = false;
+
+
+});
+
 
 app.controller('collapse_ctrl_F2', function ($scope) {
 
+
     $scope.isCollapsed_F2 = false;
+
+
+
+    $scope.map = { center: { latitude: 44.8206, longitude: 20.4622 }, zoom: 8 };
+
+    $scope.marker = {
+        id: 0,
+        coords: {
+            latitude: 44.8206,
+            longitude: 20.4622
+        },
+        options: { draggable: true },
+        events: {
+            dragend: function (marker, eventName, args) {
+                console.log('marker dragged');
+                var lat = marker.getPosition().lat();
+                var lon = marker.getPosition().lng();
+                console.log(lat);
+                console.log(lon);
+
+                $scope.marker.options = {
+                    draggable: true,
+                    labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
+                    labelAnchor: "100 0",
+                    labelClass: "marker-labels"
+                };
+            }
+        }
+    };
+
+    $scope.searchbox = {
+        template:'searchbox.tpl.html',
+        events:{
+            places_changed: function (searchBox) {
+                var places = searchBox.getPlaces();
+                var place = places[0];
+                $scope.map = {
+                    center:{
+                        latitude:place.geometry.location.lat(),
+                        longitude:place.geometry.location.lng()
+                    },
+                    zoom:10
+                };
+
+                // refresh the marker
+                $scope.marker = {
+                    id:0,
+                    options:{ draggable:true },
+                    coords:{
+                        latitude:place.geometry.location.lat(),
+                        longitude:place.geometry.location.lng()
+                    }
+                };
+            }
+        }
+    };
+
+
+    $scope.outputs = {};
+    $scope.inputs = {
+        'category': ['documents','electronics','clothing','pets','drugs','other']
+    };
+    $scope.setOutput = function(typeKey, $index, value) {
+
+
+        $scope.outputs[typeKey] = $scope.outputs[typeKey] || [];
+
+        if($scope.outputs[typeKey][$index] == value){
+
+            $scope.outputs[typeKey][$index] = null;
+
+        }
+        else  $scope.outputs[typeKey][$index] = value;
+
+        console.log('itemz:'+ $scope.outputs[typeKey]+"  $index "+$index+"  value "+value);
+    };
+
+    //submit function
+    $scope.found_something = function (){
+
+        console.log("SUBMITTED");
+
+
+    };
 
 });
 
