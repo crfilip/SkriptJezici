@@ -71,8 +71,8 @@ app.controller('main_ctrl',function (Session,$scope, $rootScope) {
         $rootScope.log = 'Log out';
     }
 
-    $rootScope.previousState;
-    $rootScope.currentState ;
+
+
     $rootScope.$on('$stateChangeStart', function(event, to, toParams, from) {
 
         $rootScope.previousState = from.name;

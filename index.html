@@ -25,14 +25,14 @@
 
 
 </head>
-<body ng-app="LFapp" class="darkgray">
+<body ng-app="LFapp" >
 
-    <div class="navbar navbar-inverse" role="navigation">
+    <div class="navbar navbar-inverse " role="navigation">
         <div class="navbar-header">
-            <a class="navbar-brand" ui-sref="#" >Lost and Found</a>
+            <a class="navbar-brand" ui-sref="home" >Lost and Found</a>
         </div>
 
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav masthead-nav">
 
             <li><a ui-sref="home.logIn" class="text-bold" >{{log}}</a> </li>
         </ul>
@@ -45,6 +45,7 @@
         <div ui-view></div>
 
     </div>
+
 
 </body>
 </html>

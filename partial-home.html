@@ -1,16 +1,29 @@
 <!DOCTYPE html>
-
-<div class="jumbotron text-center">
-    <h1><span class="orange">LOST</span> & <span class="turquoise">FOUND</span></h1>
-    <p>Dedicated to retrieving <span class="yellow">EVERYTHING</span> you have ever lost </p>
+<div class="site-wrapper">
+<div class="site-wrapper-inner">
+    <div class="cover-container">
+<!--<div class="jumbotron text-center">-->
+    <div class="lnf_box">
+    <h1><span class="orange txt_lg">LOST</span> <span class="txt_lg txt_heading">&</span> <span class="turquoise txt_lg">FOUND</span></h1>
+    <p class="txt_heading">Dedicated to retrieving <span class="yellow">EVERYTHING</span> you have ever lost </p>
 
     <a ui-sref=".lost" class="btn btn-orange-light btn-small-width"><span class="white">LOST</span></a>
 
     <a ui-sref=".found" class="btn btn-turquoise-light btn-small-width"><span class="white">FOUND</span></a>
+    </div>
 
+        <div ui-view></div>
+</div>
+    </div>
 
+</div>
+<div class="mastfoot">
+    <div class="inner">
 
+        <p>© 2016 Voyen i Crney <a href="http://youtube.com/">Volim Pitu</a></p>
+    </div>
 </div>
 
 
-<div ui-view></div>
+
+

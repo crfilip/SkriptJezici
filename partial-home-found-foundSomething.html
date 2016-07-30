@@ -13,11 +13,11 @@
 
 
             <div class="form-group">
-                <label>Category</label>
+                <label class="form_padding">Category:</label>
                 </br>
-                <ul>
-                    <li ng-repeat="(typeKey, typeVal) in inputs">
-                        <span>Select one or more: </span>
+
+                    <label class="form_padding_ls" ng-repeat="(typeKey, typeVal) in inputs">
+
                         <ul>
                             <li ng-repeat="value in typeVal">
                                 <label>{{value}}
@@ -29,8 +29,8 @@
                                 </label>
                             </li>
                         </ul>
-                    </li>
-                </ul>
+                    </label>
+
             </div>
 
 
