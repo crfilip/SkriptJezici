@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="600a34f3-32ee-4861-a119-c4056983f395" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bckg/Subtle-Dark-Patterns-vol04.pat" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bckg/dark-cardboard.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bckg/dark-coverbook.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bckg/dark-hardback.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bckg/dark-softcloth.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bckg/otis_redding.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bckg/preview.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bckg/license-README-FIRST.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LostAndFound_build/css/styleCss.css" afterPath="$PROJECT_DIR$/LostAndFound_build/css/styleCss.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/partial-home-found-foundSomething.html" afterPath="$PROJECT_DIR$/partial-home-found-foundSomething.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/partial-home-lost-lostSomething.html" afterPath="$PROJECT_DIR$/partial-home-lost-lostSomething.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/partial-home.html" afterPath="$PROJECT_DIR$/partial-home.html" />
     </list>
     <ignored path="untitled1.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -59,11 +46,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="styleCss.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="styleCss.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/LostAndFound_build/css/styleCss.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1851">
-              <caret line="207" column="1" selection-start-line="207" selection-start-column="1" selection-end-line="207" selection-end-column="1" />
+            <state relative-caret-position="478">
+              <caret line="285" column="5" selection-start-line="285" selection-start-column="5" selection-end-line="285" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -79,11 +66,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="31" column="70" selection-start-line="31" selection-start-column="70" selection-end-line="31" selection-end-column="70" />
+            <state relative-caret-position="376">
+              <caret line="44" column="27" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/login.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -129,16 +126,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="partial-home-lost.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/partial-home-lost.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -174,11 +161,11 @@
         <option value="$PROJECT_DIR$/partial-home-found.html" />
         <option value="$PROJECT_DIR$/logout_success.html" />
         <option value="$PROJECT_DIR$/app.js" />
-        <option value="$PROJECT_DIR$/LostAndFound_build/css/styleCss.css" />
         <option value="$PROJECT_DIR$/partial-home-found-foundSomething.html" />
         <option value="$PROJECT_DIR$/partial-home-lost-lostSomething.html" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/partial-home.html" />
+        <option value="$PROJECT_DIR$/LostAndFound_build/css/styleCss.css" />
       </list>
     </option>
   </component>
@@ -396,7 +383,7 @@
       <workItem from="1468503406558" duration="597000" />
       <workItem from="1468586062462" duration="15401000" />
       <workItem from="1469822069633" duration="9679000" />
-      <workItem from="1469872597267" duration="10638000" />
+      <workItem from="1469872597267" duration="10798000" />
     </task>
     <task id="LOCAL-00001" summary="TESTING">
       <created>1466509567376</created>
@@ -440,11 +427,18 @@
       <option name="project" value="LOCAL" />
       <updated>1469827762956</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="-Zezao se sa cssom, ne obaziri si na tonu komentovanog cssa to cu da posklanjam kasnije&#10;">
+      <created>1469883553803</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1469883553803</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="134592000" />
+    <option name="totallyTimeSpent" value="134752000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -491,7 +485,8 @@
     <MESSAGE value="Mapa vise nije siva" />
     <MESSAGE value="-napravio preload funkcije za loadovanje mape u lostSomething i foundSomething i cuvanje isCollapsed tako da sada se ne refreshuje kada se loginujes ili logoutujes i prelazis sa stejta na stejt&#10;-dodao logout modal" />
     <MESSAGE value="-napravio preload funkcije za loadovanje mape u lostSomething i foundSomething i cuvanje isCollapsed tako da se sada ne refreshuje kada se loginujes ili logoutujes i prelazis sa stejta na stejt&#10;-dodao logout modal" />
-    <option name="LAST_COMMIT_MESSAGE" value="-napravio preload funkcije za loadovanje mape u lostSomething i foundSomething i cuvanje isCollapsed tako da se sada ne refreshuje kada se loginujes ili logoutujes i prelazis sa stejta na stejt&#10;-dodao logout modal" />
+    <MESSAGE value="-Zezao se sa cssom, ne obaziri si na tonu komentovanog cssa to cu da posklanjam kasnije&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="-Zezao se sa cssom, ne obaziri si na tonu komentovanog cssa to cu da posklanjam kasnije&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -504,6 +499,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -755,13 +751,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/LostAndFound_build/crnidebil.txt" />
-    <entry file="file://$PROJECT_DIR$/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="91" selection-start-line="11" selection-start-column="91" selection-end-line="11" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/partial-home-lost.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -805,14 +794,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LostAndFound_build/css/styleCss.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1851">
-          <caret line="207" column="1" selection-start-line="207" selection-start-column="1" selection-end-line="207" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/login_success.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -839,8 +820,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="31" column="70" selection-start-line="31" selection-start-column="70" selection-end-line="31" selection-end-column="70" />
+        <state relative-caret-position="376">
+          <caret line="44" column="27" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LostAndFound_build/css/styleCss.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="285" column="5" selection-start-line="285" selection-start-column="5" selection-end-line="285" selection-end-column="5" />
           <folding />
         </state>
       </provider>

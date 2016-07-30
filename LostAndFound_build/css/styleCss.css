@@ -119,66 +119,7 @@
 
     font-weight: bold;
 }
-/*.navbar {*/
-    /*background-image: linear-gradient(darkgray, gray , #414141);*/
 
-    /*background-repeat: no-repeat;  border-bottom: 1px solid #178ACC;*/
-    /*box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);*/
-    /*border-radius: 0px;*/
-/*}*/
-
-/*.navbar-default {*/
-    /*background-color:darkgray;*/
-    /*border: none;*/
-/*}*/
-
-/*.navbar-default .navbar-brand,*/
-/*.navbar-default .navbar-brand:hover,*/
-/*.navbar-default .navbar-brand:focus ,*/
-/*.navbar-default .navbar-nav > li > a {*/
-    /*color: #FFF;*/
-/*}*/
-
-/*.navbar-default .navbar-nav > li > a:hover,*/
-/*.navbar-default .navbar-nav > li > a:focus {*/
-    /*color: #FFF;*/
-    /*background-color: darkgray;*/
-/*}*/
-
-/*.navbar-default .navbar-toggle:hover,*/
-/*.navbar-default .navbar-toggle:focus {*/
-    /*background-color:darkgray;*/
-/*}*/
-
-/*.navbar-default .navbar-toggle {*/
-    /*border-color: darkgray;*/
-/*}*/
-
-/*.navbar-default .navbar-toggle .icon-bar {*/
-    /*background-color: darkgray;*/
-/*}*/
-
-
-/*a,*/
-/*a:focus,*/
-/*a:hover {*/
-    /*color: #fff;*/
-/*}*/
-
-/*!* Custom default button *!*/
-/*.btn-default,*/
-/*.btn-default:hover,*/
-/*.btn-default:focus {*/
-    /*color: #333;*/
-    /*text-shadow: none; !* Prevent inheritence from `body` *!*/
-    /*background-color: #fff;*/
-    /*border: 1px solid #fff;*/
-/*}*/
-
-
-/*
- * Base structure
- */
 
 html,
 body {
