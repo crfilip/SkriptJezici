@@ -1,26 +1,55 @@
 <!DOCTYPE html>
+<div class="navbar navbar-inverse header " role="navigation">
+    <div class="navbar-header">
+        <!--<a class="navbar-brand" ui-sref="home" >Lost and Found</a>-->
+        <div class="navbar-brand"><img src='http://localhost/untitled1/bckg/42-512.png'></div>
+    </div>
+
+    <ul class="nav navbar-nav masthead-nav">
+
+        <li><a ui-sref="home.logIn" class="text-bold" >{{log}}</a> </li>
+    </ul>
+
+
+</div>
 <div class="site-wrapper">
-<div class="site-wrapper-inner">
-    <div class="cover-container">
-<!--<div class="jumbotron text-center">-->
-    <div class="lnf_box">
-    <h1><span class="orange txt_lg">LOST</span> <span class="txt_lg txt_heading">&</span> <span class="turquoise txt_lg">FOUND</span></h1>
-    <p class="txt_heading">Dedicated to retrieving <span class="yellow">EVERYTHING</span> you have ever lost </p>
+    <div class="site-wrapper-inner">
+        <div class="cover-container">
+    <!--<div class="jumbotron text-center">-->
+            <div class="row">
+                <div class="social header">
+                    <ul class="social_icons text-center">
+                        <li class="facebook"><a href="#">facebook</a></li>
+                        <li class="twitter"><a href="#">twitter</a></li>
+                        <li class="insta"><a href="#">insta</a></li>
+                        <li class="youtube"><a href="#">youtube</a></li>
+                        <li class="pin"><a href="#">pintrest</a></li>
+                    </ul>
+                </div>
+            </div>
+        <div class="lnf_box header">
+            <div class="txt_heading left-padding">
+        <h1><span class="orange txt_lg">LOST</span> <span class="txt_lg txt_heading ">&</span> <span class="turquoise txt_lg">FOUND</span></h1>
+            </div>
+        <p class="txt_heading p_heading">Dedicated to retrieving <span class="yellow everything p_heading">EVERYTHING</span> you have ever lost </p>
 
-    <a ui-sref=".lost" class="btn btn-orange-light btn-small-width"><span class="white">LOST</span></a>
+        <a ui-sref=".lost"  class="btn btn-orange-light btn-small-width button_lost headerSlideLeft"><span class="white">LOST</span></a>
 
-    <a ui-sref=".found" class="btn btn-turquoise-light btn-small-width"><span class="white">FOUND</span></a>
+        <a ui-sref=".found" class="btn btn-turquoise-light btn-small-width button_found headerSlideRight"><span class="white">FOUND</span></a>
+        </div>
+
+            <div ui-view></div>
+        </div>
+
     </div>
 
-        <div ui-view></div>
 </div>
-    </div>
 
-</div>
+<div class="row">
 <div class="mastfoot">
     <div class="inner">
 
-        <p>© 2016 Voyen i Crney <a href="http://youtube.com/">Volim Pitu</a></p>
+        <p>© 2016 Voyen i Crney <a href="https://www.youtube.com/watch?v=nCekGPu1-UM">#VolimPitu</a></p>
     </div>
 </div>
 

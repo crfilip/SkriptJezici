@@ -60,6 +60,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 
 app.controller('main_ctrl',function (Session,$scope, $rootScope) {
 
+    $scope.isCollapsed = false;
     var sesija = Session.get('user');
 
     $rootScope.showMap_found=false;

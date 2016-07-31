@@ -1,16 +1,18 @@
 <div >
-    <div >
-        <button class="btn btn-turquoise-light input-block-level form-control" ng-click="load_foundThings()" ><span class="white text-bold" >FOUND THINGS</span></button>
-        <div uib-collapse="!isCollapsed_F1">
-            <div class="well well-lg"> <div ui-view="foundThings_view"></div> </div>
+    <div class="headerSlideRight">
+        <button class="btn btn-turquoise-light input-block-level form-control" ng-click="load_foundThings()"><span class="panel-title white text-bold" >FOUND THINGS</span></button>
+        <div uib-collapse="!isCollapsed_F1" class="collapseTransition" >
+            <div class="well well-lg " ><div ui-view="foundThings_view"></div> </div>
         </div>
     </div>
 </div>
+
 <br>
+
 <div >
-    <div >
-        <button class="btn btn-turquoise-light input-block-level form-control" ng-click="load_foundSomething();" ><span class="white text-bold">FOUND SOMETHING</span></button>
-        <div uib-collapse="!isCollapsed_F2">
+    <div class="headerSlideRightDelay">
+        <button class="btn btn-turquoise-light input-block-level form-control" ng-click="load_foundSomething();" ><span class="white text-bold">FOUND SOMETHING?</span></button>
+        <div uib-collapse="!isCollapsed_F2" class="collapseTransition">
             <div class="well well-lg"> <div ui-view="foundSomething_view"></div> </div>
         </div>
     </div>

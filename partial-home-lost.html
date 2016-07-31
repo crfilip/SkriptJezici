@@ -1,7 +1,7 @@
 <div >
-    <div >
+    <div class="headerSlideLeft">
         <button class="btn btn-orange-light input-block-level form-control" ng-click="load_lostThings();"><span class="white text-bold">LOST THINGS</span></button>
-        <div uib-collapse="!isCollapsed_L1">
+        <div uib-collapse="!isCollapsed_L1" class="collapseTransition">
             <div class="well well-lg"> <div ui-view="lostThings_view"></div> </div>
          </div>
     </div>
@@ -10,9 +10,9 @@
 <br>
 
 <div >
-    <div >
-        <button class="btn btn-orange-light input-block-level form-control" ng-click="load_lostSomething();"><span class="white text-bold">LOST SOMETHING</span></button>
-        <div uib-collapse="!isCollapsed_L2">
+    <div class="headerSlideLeftDelay">
+        <button class="btn btn-orange-light input-block-level form-control" ng-click="load_lostSomething();"><span class="white text-bold">LOST SOMETHING?</span></button>
+        <div uib-collapse="!isCollapsed_L2" class="collapseTransition">
             <div class="well well-lg"> <div ui-view="lostSomething_view"></div> </div>
         </div>
     </div>
