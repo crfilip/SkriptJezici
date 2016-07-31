@@ -1,24 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="600a34f3-32ee-4861-a119-c4056983f395" name="Default" comment="-Kul stvari i gomilu sranja :D">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/geometria_light_macroman/geometria-light-webfont.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/geometria_light_macroman/geometria-light-webfont.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/geometria_light_macroman/geometria-light-webfont.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/geometria_light_macroman/geometria-light-webfont.woff2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/geometria_light_macroman/geometria-light-demo.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/geometria_light_macroman/geometria-light-webfont.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/geometria_light_macroman/specimen_files/easytabs.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/geometria_light_macroman/specimen_files/grid_12-825-55-15.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/geometria_light_macroman/specimen_files/specimen_stylesheet.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/geometria_light_macroman/stylesheet.css" />
+    <list default="true" id="600a34f3-32ee-4861-a119-c4056983f395" name="Default" comment="sitna sr">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LostAndFound_build/css/styleCss.css" afterPath="$PROJECT_DIR$/LostAndFound_build/css/styleCss.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/partial-home-found-foundSomething.html" afterPath="$PROJECT_DIR$/partial-home-found-foundSomething.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/partial-home-found.html" afterPath="$PROJECT_DIR$/partial-home-found.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/partial-home-lost.html" afterPath="$PROJECT_DIR$/partial-home-lost.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/partial-home-lost-lostSomething.html" afterPath="$PROJECT_DIR$/partial-home-lost-lostSomething.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/partial-home.html" afterPath="$PROJECT_DIR$/partial-home.html" />
     </list>
     <ignored path="untitled1.iws" />
@@ -55,8 +41,8 @@
       <file leaf-file-name="partial-home-lost-lostSomething.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/partial-home-lost-lostSomething.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-270">
-              <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
+            <state relative-caret-position="121">
+              <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -82,21 +68,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="partial-home.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="partial-home.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/partial-home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-216">
-              <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="geometria-light-webfont.svg" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/geometria_light_macroman/geometria-light-webfont.svg">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="23" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
+            <state relative-caret-position="918">
+              <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -105,8 +81,8 @@
       <file leaf-file-name="styleCss.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/LostAndFound_build/css/styleCss.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-7371">
-              <caret line="255" column="42" selection-start-line="255" selection-start-column="42" selection-end-line="255" selection-end-column="42" />
+            <state relative-caret-position="210">
+              <caret line="256" column="8" selection-start-line="256" selection-start-column="8" selection-end-line="256" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -174,16 +150,16 @@
         <option value="$PROJECT_DIR$/register_success.html" />
         <option value="$PROJECT_DIR$/login_success.html" />
         <option value="$PROJECT_DIR$/logout_success.html" />
-        <option value="$PROJECT_DIR$/partial-home-lost-lostSomething.html" />
         <option value="$PROJECT_DIR$/partial-home-found-foundSomething.html" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/partial-home.html" />
         <option value="$PROJECT_DIR$/LostAndFound_build/css/bootstrap.min.css" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/partial-home-found.html" />
         <option value="$PROJECT_DIR$/partial-home-lost.html" />
-        <option value="$PROJECT_DIR$/LostAndFound_build/css/styleCss.css" />
         <option value="$PROJECT_DIR$/geometria_light_macroman/geometria-light-webfont.svg" />
+        <option value="$PROJECT_DIR$/partial-home-lost-lostSomething.html" />
+        <option value="$PROJECT_DIR$/LostAndFound_build/css/styleCss.css" />
+        <option value="$PROJECT_DIR$/partial-home.html" />
       </list>
     </option>
   </component>
@@ -239,6 +215,66 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="untitled1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="untitled1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="untitled1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LostAndFound_build" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="untitled1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="untitled1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LostAndFound_build" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="untitled1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="untitled1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="geometria_light_macroman" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="untitled1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="untitled1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bckg" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -373,7 +409,7 @@
       <workItem from="1468503406558" duration="597000" />
       <workItem from="1468586062462" duration="15401000" />
       <workItem from="1469822069633" duration="9679000" />
-      <workItem from="1469872597267" duration="42670000" />
+      <workItem from="1469872597267" duration="43969000" />
     </task>
     <task id="LOCAL-00001" summary="TESTING">
       <created>1466509567376</created>
@@ -431,11 +467,25 @@
       <option name="project" value="LOCAL" />
       <updated>1469883648229</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="-Kul stvari i gomilu sranja :D&#10;-postoje 2 errora iz fajlova za font ali nije prob i nije kao da mogu ra ih resim, mozemo drugi font jedino">
+      <created>1469980700937</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1469980700937</updated>
+    </task>
+    <task id="LOCAL-00010" summary="-Kul stvari i gomilu sranja :D&#10;-postoje 2 errora iz fajlova za font ali nije prob i nije kao da mogu ra ih resim, mozemo drugi font jedino">
+      <created>1469980740430</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1469980740430</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="166624000" />
+    <option name="totallyTimeSpent" value="167923000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -443,7 +493,7 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1727672" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19873817" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -484,7 +534,9 @@
     <MESSAGE value="-napravio preload funkcije za loadovanje mape u lostSomething i foundSomething i cuvanje isCollapsed tako da se sada ne refreshuje kada se loginujes ili logoutujes i prelazis sa stejta na stejt&#10;-dodao logout modal" />
     <MESSAGE value="-Zezao se sa cssom, ne obaziri si na tonu komentovanog cssa to cu da posklanjam kasnije&#10;" />
     <MESSAGE value="-Kul stvari i gomilu sranja :D" />
-    <option name="LAST_COMMIT_MESSAGE" value="-Kul stvari i gomilu sranja :D" />
+    <MESSAGE value="-Kul stvari i gomilu sranja :D&#10;-postoje 2 errora iz fajlova za font ali nije prob i nije kao da mogu ra ih resim, mozemo drugi font jedino" />
+    <MESSAGE value="sitna sr" />
+    <option name="LAST_COMMIT_MESSAGE" value="sitna sr" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -724,14 +776,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/geometria_light_macroman/stylesheet.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="24" column="12" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/LostAndFound_build/css/bootstrap.min.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
@@ -748,14 +792,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/partial-home-lost-lostSomething.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-270">
-          <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/angular-bootstrap-simple-chat-master/src/scripts/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="697">
@@ -768,14 +804,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="20" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -806,14 +834,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LostAndFound_build/css/styleCss.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7371">
-          <caret line="255" column="42" selection-start-line="255" selection-start-column="42" selection-end-line="255" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/partial-home-found-foundSomething.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -830,18 +850,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/partial-home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-216">
-          <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/geometria_light_macroman/geometria-light-webfont.svg">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="21" column="23" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/partial-home-lost-lostSomething.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/geometria_light_macroman/stylesheet.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="24" column="12" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LostAndFound_build/css/styleCss.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="256" column="8" selection-start-line="256" selection-start-column="8" selection-end-line="256" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/partial-home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="918">
+          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding />
         </state>
       </provider>
