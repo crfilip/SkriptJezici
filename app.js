@@ -2,7 +2,15 @@
  * Created by Filip on 5/18/2016.
  */
 
-var app = angular.module('LFapp', ['ui.router','ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps']);
+var app = angular.module('LFapp', ['ui.router','ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps','chat']).constant( 'config', {
+    //
+    // Get your PubNub API Keys in link below phone demo.
+    //
+    "pubnub": {
+        "publish-key"   : "pub-c-29487e55-bb3b-4bea-a01e-b412d1d7df83",
+        "subscribe-key" : "sub-c-84ed3c5a-5807-11e6-8457-02ee2ddab7fe"
+    }
+} );
 
 
 app.config(function ($stateProvider, $urlRouterProvider) {
@@ -56,9 +64,31 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     
 });
 
+//Chat controller, ubacio sam clear chat funkciju samo, inace ostaju poruke sacuvane u bazi iz API-a tako da uvek mozemo da im pristupimo
+app.controller( 'chat', [ 'Messages', '$scope',
+    function( Messages, $scope ) {
+        // Message Inbox
+        $scope.messages = [];
+
+        // Receive Messages
+        Messages.receive(function(message){
+            $scope.messages.push(message);
+        });
+
+        // Send Messages
+        $scope.send = function() {
+            Messages.send({ data : $scope.textbox });
+
+        };
+        $scope.clear = function() {
+            $scope.messages.length = 0;
+
+        };
+    } ] );
+
+app.controller('main_ctrl',function (Session,$scope, $rootScope, $http) {
 
 
-app.controller('main_ctrl',function (Session,$scope, $rootScope) {
 
     $scope.isCollapsed = false;
     var sesija = Session.get('user');
@@ -120,6 +150,7 @@ app.controller('main_ctrl',function (Session,$scope, $rootScope) {
         console.log("iscollaps "+$scope.isCollapsed_L2);
 
     };
+
 
 });
 app.controller( 'collapse_ctrl_L1', function ($scope) {
