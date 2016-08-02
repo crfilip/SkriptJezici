@@ -65,11 +65,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 });
 
 //Chat controller, ubacio sam clear chat funkciju samo, inace ostaju poruke sacuvane u bazi iz API-a tako da uvek mozemo da im pristupimo
-app.controller( 'chat', [ 'Messages', '$scope',
-    function( Messages, $scope ) {
+app.controller( 'chat', [ 'Messages', '$scope','Session',
+    function( Messages, $scope, $rootScope,Session ) {
         // Message Inbox
         $scope.messages = [];
-
         // Receive Messages
         Messages.receive(function(message){
             $scope.messages.push(message);
@@ -78,7 +77,6 @@ app.controller( 'chat', [ 'Messages', '$scope',
         // Send Messages
         $scope.send = function() {
             Messages.send({ data : $scope.textbox });
-
         };
         $scope.clear = function() {
             $scope.messages.length = 0;
@@ -86,7 +84,7 @@ app.controller( 'chat', [ 'Messages', '$scope',
         };
     } ] );
 
-app.controller('main_ctrl',function (Session,$scope, $rootScope, $http) {
+app.controller('main_ctrl',function (Messages,Session,$scope, $rootScope, $http) {
 
 
 
@@ -99,6 +97,8 @@ app.controller('main_ctrl',function (Session,$scope, $rootScope, $http) {
     if(sesija==null){
         $rootScope.log = 'Log in';
     }else{
+        Messages.user({ name : Session.get('nickname')});
+        console.log("User:" +Session.get('nickname') );
         $rootScope.log = 'Log out';
     }
 
@@ -377,7 +377,7 @@ app.controller('login_modal_ctrl',function (Session,$scope, $uibModal, $rootScop
 
 });
 
-app.controller('login_modal_instance_ctrl', function (Session,$scope, $http, $uibModalInstance, $uibModal, $rootScope, $state) {
+app.controller('login_modal_instance_ctrl', function (Messages,Session,$scope, $http, $uibModalInstance, $uibModal, $rootScope, $state) {
 
 
     $scope.register = function () {
@@ -401,11 +401,16 @@ app.controller('login_modal_instance_ctrl', function (Session,$scope, $http, $ui
                     $scope.warning="Wrong credentials";
                 }
                 else {
+
                     var fields = user.data.split(" ");
                     console.log(fields[0]);
                     Session.set('user',fields[1]);
+                    Session.set('log',"Log out");
+                    Session.set('nickname',fields[0]);
                     $rootScope.log = 'Log out';
-                    $rootScope.nickname = fields[0];
+
+                    Messages.user({ name : Session.get('nickname')});
+                    console.log("User:" +Session.get('nickname') );
                     $uibModalInstance.close();
 
                     $uibModal.open({
