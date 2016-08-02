@@ -12,7 +12,7 @@ var app = angular.module('LFapp', ['ui.router','ui.bootstrap', 'ngAnimate', 'uiG
     }
 } );
 
-
+//nemoj pusovati jebeni workspace, jeeeeebiii gaaaaa
 app.config(function ($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/home');
