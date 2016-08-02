@@ -1,4 +1,4 @@
 _site
 videos
 .DS_Store
-workspace.xml
+**/.idea/workspace.xml

@@ -40,7 +40,7 @@
         <entry file="file://$PROJECT_DIR$/angularjs-chat/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="51">
-              <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+              <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -366,7 +366,7 @@
       <workItem from="1470062494778" duration="9016000" />
       <workItem from="1470147419019" duration="103000" />
       <workItem from="1470148453374" duration="214000" />
-      <workItem from="1470149979078" duration="4014000" />
+      <workItem from="1470149979078" duration="4136000" />
     </task>
     <task id="LOCAL-00001" summary="TESTING">
       <created>1466509567376</created>
@@ -459,11 +459,18 @@
       <option name="project" value="LOCAL" />
       <updated>1470153377384</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="gitignore">
+      <created>1470154027096</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1470154027096</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="182380000" />
+    <option name="totallyTimeSpent" value="182502000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -516,7 +523,8 @@
     <MESSAGE value="sitna sr" />
     <MESSAGE value="malo sam promenio spiku" />
     <MESSAGE value="user zapamcen" />
-    <option name="LAST_COMMIT_MESSAGE" value="user zapamcen" />
+    <MESSAGE value="gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="gitignore" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -848,7 +856,7 @@
     <entry file="file://$PROJECT_DIR$/angularjs-chat/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
-          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+          <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
           <folding />
         </state>
       </provider>
