@@ -102,12 +102,12 @@ label{ font-family: 'geometria_lightlight', Arial, sans-serif; }
 
 @font-face {
     font-family: 'geometria_lightlight';
-    src: url('http://localhost/untitled1/geometria_light_macroman/geometria-light-webfont.eot');
-    src: url('http://localhost/untitled1/geometria_light_macroman/geometria-light-webfont.eot?#iefix') format('embedded-opentype'),
-    url('http://localhost/untitled1/geometria_light_macroman/geometria-light-webfont.woff2') format('woff2'),
-    url('http://localhost/untitled1/geometria_light_macroman/geometria-light-webfont.woff') format('woff'),
-    url('http://localhost/untitled1/geometria_light_macroman/geometria-light-webfont.ttf') format('truetype'),
-    url('http://localhost/untitled1/geometria_light_macroman/geometria-light-webfont.svg#geometria_lightlight') format('svg');
+    src: url('http://localhost/SkriptJezici/geometria_light_macroman/geometria-light-webfont.eot');
+    src: url('http://localhost/SkriptJezici/geometria_light_macroman/geometria-light-webfont.eot?#iefix') format('embedded-opentype'),
+    url('http://localhost/SkriptJezici/geometria_light_macroman/geometria-light-webfont.woff2') format('woff2'),
+    url('http://localhost/SkriptJezici/geometria_light_macroman/geometria-light-webfont.woff') format('woff'),
+    url('http://localhost/SkriptJezici/geometria_light_macroman/geometria-light-webfont.ttf') format('truetype'),
+    url('http://localhost/SkriptJezici/geometria_light_macroman/geometria-light-webfont.svg#geometria_lightlight') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -124,7 +124,7 @@ label{ font-family: 'geometria_lightlight', Arial, sans-serif; }
 /*.navbar-image{*/
     /*!*background-size: 100% 100%;*!*/
     /*!*background: url(http://p1.pichost.me/i/66/1910819.jpg) no-repeat center center fixed;*!*/
-    /*background-image : url('http://localhost/untitled1/bckg/42-512.png');*/
+    /*background-image : url('http://localhost/SkriptJezici/bckg/42-512.png');*/
     /*-webkit-background-size: cover;*/
     /*-moz-background-size: cover;*/
     /*-o-background-size: cover;*/
@@ -232,7 +232,7 @@ body {
     /*-moz-background-size: cover;*/
     /*-o-background-size: cover;*/
     /*background-size: cover;*/
-    background-image: url("http://localhost/untitled1/bckg/dark-hardback.png");
+    background-image: url("http://localhost/SkriptJezici/bckg/dark-hardback.png");
     /*background-attachment: fixed; @Veliki scroll lag*/
     background-repeat: repeat;
 
@@ -395,7 +395,7 @@ body {
     width: 30px;
     height: 30px;
     font-size: 0px;
-    background: url(http://localhost/untitled1/bckg/MkUfchL.png) no-repeat;
+    background: url(http://localhost/SkriptJezici/bckg/MkUfchL.png) no-repeat;
     margin-top: 4px;
     display:block;
     -webkit-transition: all ease 0.4s;
