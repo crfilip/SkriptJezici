@@ -160,7 +160,7 @@ app.controller( 'collapse_ctrl_L1', function ($scope) {
 });
 
 
-app.controller('collapse_ctrl_L2', function ($scope) {
+app.controller('collapse_ctrl_L2', function ($scope,$http) {
 
 
 
@@ -240,9 +240,36 @@ app.controller('collapse_ctrl_L2', function ($scope) {
     };
 
     //submit function
-    $scope.found_something = function (){
-
-        console.log("SUBMITTED");
+    $scope.lost_something = function ($index){
+        console.log($index);
+        // $http.post("db_login.php", {'name' :$scope.itemName, 'category':$scope.password, 'description':$scope.description,'latitude':$scope.marker.coords.latitude,'longtitude':$scope.marker.coords.longtitude})
+        //     .then(function (user) {
+        //
+        //         if(user.data=="wrong")
+        //         {
+        //             $scope.warning="Wrong credentials";
+        //         }
+        //         else {
+        //
+        //             var fields = user.data.split(" ");
+        //             console.log(fields[0]);
+        //             Session.set('user',fields[1]);
+        //             Session.set('log',"Log out");
+        //             Session.set('nickname',fields[0]);
+        //             $rootScope.nickname = fields[0];
+        //             $rootScope.log = 'Log out';
+        //
+        //             Messages.user({ name : Session.get('nickname')});
+        //             console.log("User:" +Session.get('nickname') );
+        //             $uibModalInstance.close();
+        //
+        //             $uibModal.open({
+        //                 templateUrl: 'login_success.html',
+        //                 controller: 'login_success_ctrl'
+        //
+        //             })
+        //         }
+        //     })
 
 
     };
@@ -407,6 +434,7 @@ app.controller('login_modal_instance_ctrl', function (Messages,Session,$scope, $
                     Session.set('user',fields[1]);
                     Session.set('log',"Log out");
                     Session.set('nickname',fields[0]);
+                    $rootScope.nickname = fields[0];
                     $rootScope.log = 'Log out';
 
                     Messages.user({ name : Session.get('nickname')});

@@ -22,7 +22,7 @@
                             <li ng-repeat="value in typeVal">
                                 <label>{{value}}
                                     <input
-                                            type="checkbox"
+                                            type="radio"
                                             ng-model="checkValue"
                                             ng-change="setOutput(typeKey, $index, value)"
                                     >
@@ -36,7 +36,7 @@
 
             <div class="form-group">
                 <label for="comment">Description</label>
-                <textarea class="form-control" rows="5" id="comment"></textarea>
+                <textarea ng-model="description" class="form-control" rows="5" id="comment"></textarea>
             </div>
 
             <div >

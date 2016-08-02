@@ -3,7 +3,7 @@
         <h3><strong>You can report your findings in a form below</strong></h3>
     </div>
     </br>
-    <form ng-submit="found_something()" onkeypress="return event.keyCode != 13;">
+    <form ng-submit="lost_something()" onkeypress="return event.keyCode != 13;">
         <div>
 
             <div class="form-group">
@@ -15,15 +15,21 @@
             <div class="form-group">
                 <label class="form_padding">Category</label>
                 </br>
+                <!--<label class="form_padding_ls"> Documents</label>-->
+                <!--<label class="form_padding_ls"> Electronics</label>-->
+                <!--<label class="form_padding_ls"> Clothing</label>-->
+                <!--<label class="form_padding_ls"> Pets</label>-->
+
+
                     <label class="form_padding_ls" ng-repeat="(typeKey, typeVal) in inputs">
                         <ul>
                             <li ng-repeat="value in typeVal">
                                 <label>{{value}}
                                     <input
-                                            type="checkbox"
-                                            ng-model="checkValue"
-                                            ng-change="setOutput(typeKey, $index, value)"
-                                    >
+                                            type="radio"
+                                            name="bratina"
+                                            ng-click="lost_something($index)"
+                                    />{{radioValue}}
                                 </label>
                             </li>
                         </ul>
