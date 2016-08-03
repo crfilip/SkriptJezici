@@ -118,7 +118,7 @@ app.controller('main_ctrl',function ($state, Messages,Session,$scope, $rootScope
 
     $rootScope.currentState = $state.$current;
 
-    console.log("trenutni state: "+ $rootScope.currentState);
+
     $rootScope.$on('$stateChangeStart', function(event, to, toParams, from) {
 
         $rootScope.previousState = from.name;
@@ -149,6 +149,7 @@ app.controller('main_ctrl',function ($state, Messages,Session,$scope, $rootScope
         $rootScope.reg = '';
     }
 
+    //odavde krece rutiranje za LOGIN
     $scope.log_in_modal = function () {
 
         var sesija = Session.get('user');
@@ -156,8 +157,6 @@ app.controller('main_ctrl',function ($state, Messages,Session,$scope, $rootScope
 
         if (sesija == null) {
             console.log(sesija);
-            console.log("SEEESIJAA");
-
             $uibModal.open({
 
                 templateUrl: 'login.html',
@@ -165,11 +164,11 @@ app.controller('main_ctrl',function ($state, Messages,Session,$scope, $rootScope
 
             });
         } else {
+
             Session.kill('user');
-            console.log("SRANJEE");
              $rootScope.log = 'Log in';
             $rootScope.reg = 'Register';
-            // $state.go($rootScope.previousState);
+
             $uibModal.open({
                 templateUrl: 'logout_success.html',
                 controller: 'logout_success_ctrl'
@@ -177,8 +176,9 @@ app.controller('main_ctrl',function ($state, Messages,Session,$scope, $rootScope
             })
         }
     }
+    //rutiranje za REGISTER
     $scope.register_modal = function () {
-        // $uibModalInstance.close();
+
 
 
         $uibModal.open({
