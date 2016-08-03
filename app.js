@@ -25,11 +25,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'main_ctrl'
         })
 
-        .state('home.logIn',{
-            url:'',
-            controller: 'login_modal_ctrl'
-        })
-
         .state('home.lost',{
             url:'/lost',
             views: {   
@@ -63,6 +58,41 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         })
     
 });
+//
+// app.provider('modalState', function($stateProvider) {
+//     var provider = this;
+//     var modalResult;
+//     this.$get = function() {
+//         return provider;
+//     };
+//     this.state = function(stateName, options) {
+//         var modalInstance;
+//         $stateProvider.state(stateName, {
+//             url: options.url,
+//             onEnter: ['$modal', '$state', function($modal, $state) {
+//                 modalInstance = $modal.open(options);
+//                 // When the modal uses $close({..}), the data (=result) will be assigned to the parent state as 'modalResult'.
+//                 modalInstance.result.then(function(result) {
+//                     modalResult = result;
+//                 }).finally(function() { // modal closes
+//                     if(modalResult) {
+//                         $state.get('^').modalResult = modalResult;
+//                     }
+//                     modalInstance = modalResult = null;
+//                     if ($state.$current.name === stateName) {
+//                         $state.go('^'); // go to parent state
+//                     }
+//                 });
+//             }],
+//             onExit: function() {
+//                 if (modalInstance) {
+//                     modalInstance.close();
+//                 }
+//             }
+//         });
+//         return provider;
+//     };
+// });
 
 //Chat controller, ubacio sam clear chat funkciju samo, inace ostaju poruke sacuvane u bazi iz API-a tako da uvek mozemo da im pristupimo
 app.controller( 'chat', [ 'Messages', '$scope','Session',
@@ -84,8 +114,18 @@ app.controller( 'chat', [ 'Messages', '$scope','Session',
         };
     } ] );
 
-app.controller('main_ctrl',function (Messages,Session,$scope, $rootScope, $http) {
+app.controller('main_ctrl',function ($state, Messages,Session,$scope, $rootScope, $http, $uibModal) {
 
+    $rootScope.currentState = $state.$current;
+
+    console.log("trenutni state: "+ $rootScope.currentState);
+    $rootScope.$on('$stateChangeStart', function(event, to, toParams, from) {
+
+        $rootScope.previousState = from.name;
+        $rootScope.currentState = to.name;
+        console.log('Previous state:'+$rootScope.previousState);
+        console.log('Current state:'+$rootScope.currentState);
+    });
 
     $scope.inputs = {
         'category': ['documents','electronics','clothing','pets','drugs','other']
@@ -98,22 +138,57 @@ app.controller('main_ctrl',function (Messages,Session,$scope, $rootScope, $http)
     $rootScope.showMap_lost_things=false;
 
     if(sesija==null){
+
         $rootScope.log = 'Log in';
+        $rootScope.reg = 'Register';
     }else{
+
         Messages.user({ name : Session.get('nickname')});
         console.log("User:" +Session.get('nickname') );
         $rootScope.log = 'Log out';
+        $rootScope.reg = '';
+    }
+
+    $scope.log_in_modal = function () {
+
+        var sesija = Session.get('user');
+
+
+        if (sesija == null) {
+            console.log(sesija);
+            console.log("SEEESIJAA");
+
+            $uibModal.open({
+
+                templateUrl: 'login.html',
+                controller: 'login_modal_instance_ctrl'
+
+            });
+        } else {
+            Session.kill('user');
+            console.log("SRANJEE");
+             $rootScope.log = 'Log in';
+            $rootScope.reg = 'Register';
+            // $state.go($rootScope.previousState);
+            $uibModal.open({
+                templateUrl: 'logout_success.html',
+                controller: 'logout_success_ctrl'
+
+            })
+        }
+    }
+    $scope.register_modal = function () {
+        // $uibModalInstance.close();
+
+
+        $uibModal.open({
+            templateUrl: 'register.html',
+            controller: 'register_ctrl'
+        })
     }
 
 
 
-    $rootScope.$on('$stateChangeStart', function(event, to, toParams, from) {
-
-        $rootScope.previousState = from.name;
-        $rootScope.currentState = to.name;
-        console.log('Previous state:'+$rootScope.previousState);
-        console.log('Current state:'+$rootScope.currentState);
-    });
 
     // ima ng-if na map elementu(u foundSomething.html) koji zavisi od showMap, prikazuje je ili ne, odnosno kad je true iscrtava ispocetka i ne bude sivo
     //funkcije za preload i cuvanje elemenata kao sto su showMap i collapse vrenosti, i sta god bude trebalo
@@ -196,7 +271,17 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
 });
 
 app.controller('collapse_ctrl_L2', function ($scope,$http,Session,$rootScope) {
+    if (Session.get('user') == null){
+        console.log("usao if");
+        $scope.logIn_warning="You need to ";
+        $scope.register_warning="Dont have an account? ";
+        $scope.logIn_anchor="Log in";
+        $scope.register_anchor="Register";
 
+    }else{
+        $scope.warning="";
+        $scope.logIn_anchor="";
+    }
 
 
     $scope.map = { center: { latitude: 44.8206, longitude: 20.4622 }, zoom: 8 };
@@ -276,37 +361,51 @@ app.controller('collapse_ctrl_L2', function ($scope,$http,Session,$rootScope) {
         index=$index;
     };
 
-    $scope.lost_something= function(){
-        $http.post("db_add_lost.php", {'user':Session.get('user'),'nickname':Session.get('nickname'),'itemName' :$scope.itemName, 'category':index, 'description':$scope.description,'latitude':$scope.marker.coords.latitude,'longitude':$scope.marker.coords.longitude})
-             .then(function (user) {
-                 $rootScope.refreshMap();
-            // // treba da se doda samo popup uspesno dodavanje / neuspesno dodavanje, ali dodavanje radi &&
-            //     if(user.data=="wrong")
-            //     {
-            //         $scope.warning="Wrong credentials";
-            //     }
-            //     else {
-            //
-            //         var fields = user.data.split(" ");
-            //         console.log(fields[0]);
-            //         Session.set('user',fields[1]);
-            //         Session.set('log',"Log out");
-            //         Session.set('nickname',fields[0]);
-            //         $rootScope.nickname = fields[0];
-            //         $rootScope.log = 'Log out';
-            //
-            //         Messages.user({ name : Session.get('nickname')});
-            //         console.log("User:" +Session.get('nickname') );
-            //         $uibModalInstance.close();
-            //
-            //         $uibModal.open({
-            //             templateUrl: 'login_success.html',
-            //             controller: 'login_success_ctrl'
-            //
-            //         })
-            //     }
-             })
-   }
+    $scope.lost_something= function() {
+
+        if (Session.get('user') == null) {
+
+        }
+        else {
+            $http.post("db_add_lost.php", {
+                'user': Session.get('user'),
+                'nickname': Session.get('nickname'),
+                'itemName': $scope.itemName,
+                'category': index,
+                'description': $scope.description,
+                'latitude': $scope.marker.coords.latitude,
+                'longitude': $scope.marker.coords.longitude
+            })
+                .then(function (user) {
+                    $rootScope.refreshMap();
+                    // // treba da se doda samo popup uspesno dodavanje / neuspesno dodavanje, ali dodavanje radi &&
+                    //     if(user.data=="wrong")
+                    //     {
+                    //         ;
+                    //     }
+                    //     else {
+                    //
+                    //         var fields = user.data.split(" ");
+                    //         console.log(fields[0]);
+                    //         Session.set('user',fields[1]);
+                    //         Session.set('log',"Log out");
+                    //         Session.set('nickname',fields[0]);
+                    //         $rootScope.nickname = fields[0];
+                    //         $rootScope.log = 'Log out';
+                    //
+                    //         Messages.user({ name : Session.get('nickname')});
+                    //         console.log("User:" +Session.get('nickname') );
+                    //         $uibModalInstance.close();
+                    //
+                    //         $uibModal.open({
+                    //             templateUrl: 'login_success.html',
+                    //             controller: 'login_success_ctrl'
+                    //
+                    //         })
+                    //     }
+                })
+        }
+    }
 
 });
 
@@ -408,37 +507,40 @@ app.controller('collapse_ctrl_F2', function ($scope) {
     };
 
 });
-
-app.controller('login_modal_ctrl',function (Session,$scope, $uibModal, $rootScope, $state) {
-
-    var sesija = Session.get('user');
-
-    if(sesija==null){
-        console.log(sesija);
-        $state.go($rootScope.previousState);
-
-        $uibModal.open({
-
-            templateUrl: 'login.html',
-            controller: 'login_modal_instance_ctrl'
-
-        });
-    }else{
-        Session.kill('user');
-        $rootScope.log = 'Log in';
-        $state.go($rootScope.previousState);
-        $uibModal.open({
-            templateUrl: 'logout_success.html',
-            controller: 'logout_success_ctrl'
-
-        })
-    }
-
-
-
-});
+//
+// app.controller('login_modal_ctrl',function (Session,$scope, $uibModal, $rootScope, $state) {
+//
+//     $rootScope.log_state = $rootScope.previousState;
+//
+//     var sesija = Session.get('user');
+//
+//     if(sesija==null){
+//         console.log(sesija);
+//          // $state.go($rootScope.previousState);
+//
+//         $uibModal.open({
+//
+//             templateUrl: 'login.html',
+//             controller: 'login_modal_instance_ctrl'
+//
+//         });
+//     }else{
+//         Session.kill('user');
+//         $rootScope.log = 'Log in';
+//         // $state.go($rootScope.previousState);
+//         $uibModal.open({
+//             templateUrl: 'logout_success.html',
+//             controller: 'logout_success_ctrl'
+//
+//         })
+//     }
+//
+//
+//
+// });
 
 app.controller('login_modal_instance_ctrl', function (Messages,Session,$scope, $http, $uibModalInstance, $uibModal, $rootScope, $state) {
+
 
 
     $scope.register = function () {
@@ -456,7 +558,6 @@ app.controller('login_modal_instance_ctrl', function (Messages,Session,$scope, $
         console.log('email:'+$scope.email+' pass:'+$scope.password);
         $http.post("db_login.php", {'email' :$scope.email, 'password':$scope.password})
             .then(function (user) {
-
                 if(user.data=="wrong")
                 {
                     $scope.warning="Wrong credentials";
@@ -492,20 +593,25 @@ app.controller('login_modal_instance_ctrl', function (Messages,Session,$scope, $
 
 });
 
-app.controller('login_success_ctrl', function ($scope, $uibModalInstance) {
+app.controller('login_success_ctrl', function ($scope, $uibModalInstance, $state, $rootScope) {
 
     $scope.exit = function () {
-
+    console.log("login state: "+$rootScope.currentState);
+        $state.reload($rootScope.currentState);
+        $rootScope.reg = '';
         $uibModalInstance.close();
     }
 });
-app.controller('logout_success_ctrl', function ($scope, $uibModalInstance) {
+app.controller('logout_success_ctrl', function ($scope, $uibModalInstance, $state, $rootScope) {
 
     $scope.exit = function () {
-
+        console.log("login state: "+$rootScope.currentState);
+        $state.reload($rootScope.currentState);
+        $rootScope.reg = 'Register';
         $uibModalInstance.close();
     }
 });
+
 
 app.controller('register_ctrl', function ($scope, $http, $uibModalInstance, $uibModal, $rootScope) {
 

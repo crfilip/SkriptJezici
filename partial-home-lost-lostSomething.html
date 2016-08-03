@@ -1,6 +1,12 @@
 <div>
     <div>
         <h3><strong>You can report your findings in a form below</strong></h3>
+
+        <p  class="text-danger text-center" style="font-size:18px;">{{logIn_warning}}<a style="font-size:16px" ng-click="log_in_modal()">{{logIn_anchor}}</a></p>
+
+        <p  class="text-danger text-center" style="font-size:18px;">{{register_warning}}<a style="font-size:16px" ng-click="register_modal()">{{register_anchor}}</a></p>
+
+
     </div>
     </br>
     <form ng-submit="lost_something()" onkeypress="return event.keyCode != 13;">
@@ -57,6 +63,7 @@
         </div>
         </br>
         <button type="submit" class="btn btn-yellow center-block" ><span class="white text-bold">Submit</span></button>
+
 
     </form>
 </div>
