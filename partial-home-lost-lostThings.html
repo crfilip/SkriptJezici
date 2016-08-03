@@ -1,6 +1,12 @@
 <!DOCTYPE html>
     <h3>Lost Things</h3>
+<div >
+    <ui-gmap-google-map ng-if="showMap_lost_things" center='map.center' zoom='map.zoom' draggable="true" options="options">
+        <ui-gmap-markers models="markers" coords="'self'" icon="'icon'">
+        </ui-gmap-markers>
 
+    </ui-gmap-google-map>
+</div>
     <!--<div ng-controller="chat" style="width:auto; height:auto; border: 1px solid;">-->
         <!--<div ng-repeat="message in messages">-->
             <!--{{ message.user.name }}:-->

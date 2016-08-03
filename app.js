@@ -87,12 +87,15 @@ app.controller( 'chat', [ 'Messages', '$scope','Session',
 app.controller('main_ctrl',function (Messages,Session,$scope, $rootScope, $http) {
 
 
-
+    $scope.inputs = {
+        'category': ['documents','electronics','clothing','pets','drugs','other']
+    };
     $scope.isCollapsed = false;
     var sesija = Session.get('user');
 
     $rootScope.showMap_found=false;
     $rootScope.showMap_lost=false;
+    $rootScope.showMap_lost_things=false;
 
     if(sesija==null){
         $rootScope.log = 'Log in';
@@ -135,6 +138,10 @@ app.controller('main_ctrl',function (Messages,Session,$scope, $rootScope, $http)
     $scope.load_lostThings = function (){
 
         $scope.isCollapsed_L1 = !$scope.isCollapsed_L1;
+        
+        if($scope.isCollapsed_L1)$rootScope.showMap_lost_things=true;
+        else $rootScope.showMap_lost_things=false;
+
         console.log("iscollaps "+$scope.isCollapsed_L1);
     };
     $scope.load_lostSomething = function (){
@@ -153,12 +160,37 @@ app.controller('main_ctrl',function (Messages,Session,$scope, $rootScope, $http)
 
 
 });
-app.controller( 'collapse_ctrl_L1', function ($scope) {
+app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
 
+    $scope.map = { center: { latitude: 44.8206, longitude: 20.4622 }, zoom: 8 };
 
+    $scope.options = {
+        scrollwheel: false
+    };
+    $scope.markers = [];
+    var markers = [];
     
-});
 
+
+
+    $http.post("db_lost_things.php").then(function(data){
+
+        var array = data.data.split('|');
+        for(i=0;i<array.length-1;i++){
+
+            var latlon = array[i].split(",");
+            console.log(latlon);
+            var marker = {
+                latitude: latlon[0],
+                longitude: latlon[1],
+                id:i
+            };
+            markers.push(marker);
+        }
+    })
+    $scope.markers=markers;
+
+});
 
 app.controller('collapse_ctrl_L2', function ($scope,$http,Session) {
 
@@ -220,9 +252,6 @@ app.controller('collapse_ctrl_L2', function ($scope,$http,Session) {
 
 
    // $scope.outputs = {};
-    $scope.inputs = {
-        'category': ['documents','electronics','clothing','pets','drugs','other']
-    };
     // $scope.setOutput = function(typeKey, $index, value) {
     //
     //
