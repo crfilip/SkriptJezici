@@ -169,30 +169,33 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
     };
     $scope.markers = [];
     var markers = [];
-    
 
 
+    $rootScope.refreshMap = function(){
+        $http.post("db_lost_things.php").then(function(data){
 
-    $http.post("db_lost_things.php").then(function(data){
+            var array = data.data.split('|');
+            for(i=0;i<array.length-1;i++){
 
-        var array = data.data.split('|');
-        for(i=0;i<array.length-1;i++){
+                var latlon = array[i].split(",");
+                console.log(latlon);
+                var marker = {
+                    latitude: latlon[0],
+                    longitude: latlon[1],
+                    id:i
+                };
+                markers.push(marker);
+            }
+        })
+        $scope.markers=markers;
+    }
 
-            var latlon = array[i].split(",");
-            console.log(latlon);
-            var marker = {
-                latitude: latlon[0],
-                longitude: latlon[1],
-                id:i
-            };
-            markers.push(marker);
-        }
-    })
-    $scope.markers=markers;
+    $rootScope.refreshMap();
+
 
 });
 
-app.controller('collapse_ctrl_L2', function ($scope,$http,Session) {
+app.controller('collapse_ctrl_L2', function ($scope,$http,Session,$rootScope) {
 
 
 
@@ -275,7 +278,8 @@ app.controller('collapse_ctrl_L2', function ($scope,$http,Session) {
 
     $scope.lost_something= function(){
         $http.post("db_add_lost.php", {'user':Session.get('user'),'nickname':Session.get('nickname'),'itemName' :$scope.itemName, 'category':index, 'description':$scope.description,'latitude':$scope.marker.coords.latitude,'longitude':$scope.marker.coords.longitude})
-            // .then(function (user) {
+             .then(function (user) {
+                 $rootScope.refreshMap();
             // // treba da se doda samo popup uspesno dodavanje / neuspesno dodavanje, ali dodavanje radi &&
             //     if(user.data=="wrong")
             //     {
@@ -301,7 +305,7 @@ app.controller('collapse_ctrl_L2', function ($scope,$http,Session) {
             //
             //         })
             //     }
-            // })
+             })
    }
 
 });
