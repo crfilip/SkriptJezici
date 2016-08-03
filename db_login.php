@@ -15,7 +15,8 @@ if($row === null){
 else{
     session_start();
     $_SESSION['user']= uniqid();
-    echo $row["nickname"];
+    $_SESSION['nickname']=$row["nickname"];
+    echo $_SESSION['nickname'];
     echo " ";
     echo  $_SESSION['user'];
 }

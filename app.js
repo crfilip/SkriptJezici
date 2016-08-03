@@ -160,8 +160,7 @@ app.controller( 'collapse_ctrl_L1', function ($scope) {
 });
 
 
-app.controller('collapse_ctrl_L2', function ($scope,$http) {
-
+app.controller('collapse_ctrl_L2', function ($scope,$http,Session) {
 
 
 
@@ -220,59 +219,61 @@ app.controller('collapse_ctrl_L2', function ($scope,$http) {
     };
 
 
-    $scope.outputs = {};
+   // $scope.outputs = {};
     $scope.inputs = {
         'category': ['documents','electronics','clothing','pets','drugs','other']
     };
-    $scope.setOutput = function(typeKey, $index, value) {
-
-
-        $scope.outputs[typeKey] = $scope.outputs[typeKey] || [];
-
-        if($scope.outputs[typeKey][$index] == value){
-
-            $scope.outputs[typeKey][$index] = null;
-
-        }
-        else  $scope.outputs[typeKey][$index] = value;
-
-        console.log('itemz:'+ $scope.outputs[typeKey]+"  $index "+$index+"  value "+value);
-    };
-
+    // $scope.setOutput = function(typeKey, $index, value) {
+    //
+    //
+    //     $scope.outputs[typeKey] = $scope.outputs[typeKey] || [];
+    //
+    //     if($scope.outputs[typeKey][$index] == value){
+    //
+    //         $scope.outputs[typeKey][$index] = null;
+    //
+    //     }
+    //     else  $scope.outputs[typeKey][$index] = value;
+    //
+    //     console.log('itemz:'+ $scope.outputs[typeKey]+"  $index "+$index+"  value "+value);
+    // };
+    var index;
     //submit function
-    $scope.lost_something = function ($index){
-        console.log($index);
-        // $http.post("db_login.php", {'name' :$scope.itemName, 'category':$scope.password, 'description':$scope.description,'latitude':$scope.marker.coords.latitude,'longtitude':$scope.marker.coords.longtitude})
-        //     .then(function (user) {
-        //
-        //         if(user.data=="wrong")
-        //         {
-        //             $scope.warning="Wrong credentials";
-        //         }
-        //         else {
-        //
-        //             var fields = user.data.split(" ");
-        //             console.log(fields[0]);
-        //             Session.set('user',fields[1]);
-        //             Session.set('log',"Log out");
-        //             Session.set('nickname',fields[0]);
-        //             $rootScope.nickname = fields[0];
-        //             $rootScope.log = 'Log out';
-        //
-        //             Messages.user({ name : Session.get('nickname')});
-        //             console.log("User:" +Session.get('nickname') );
-        //             $uibModalInstance.close();
-        //
-        //             $uibModal.open({
-        //                 templateUrl: 'login_success.html',
-        //                 controller: 'login_success_ctrl'
-        //
-        //             })
-        //         }
-        //     })
+    $scope.lost_something_index = function ($index){
 
-
+        index=$index;
     };
+
+    $scope.lost_something= function(){
+        $http.post("db_add_lost.php", {'user':Session.get('user'),'nickname':Session.get('nickname'),'itemName' :$scope.itemName, 'category':index, 'description':$scope.description,'latitude':$scope.marker.coords.latitude,'longitude':$scope.marker.coords.longitude})
+            // .then(function (user) {
+            // // treba da se doda samo popup uspesno dodavanje / neuspesno dodavanje, ali dodavanje radi &&
+            //     if(user.data=="wrong")
+            //     {
+            //         $scope.warning="Wrong credentials";
+            //     }
+            //     else {
+            //
+            //         var fields = user.data.split(" ");
+            //         console.log(fields[0]);
+            //         Session.set('user',fields[1]);
+            //         Session.set('log',"Log out");
+            //         Session.set('nickname',fields[0]);
+            //         $rootScope.nickname = fields[0];
+            //         $rootScope.log = 'Log out';
+            //
+            //         Messages.user({ name : Session.get('nickname')});
+            //         console.log("User:" +Session.get('nickname') );
+            //         $uibModalInstance.close();
+            //
+            //         $uibModal.open({
+            //             templateUrl: 'login_success.html',
+            //             controller: 'login_success_ctrl'
+            //
+            //         })
+            //     }
+            // })
+   }
 
 });
 

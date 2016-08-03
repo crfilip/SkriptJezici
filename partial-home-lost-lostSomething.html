@@ -28,8 +28,8 @@
                                     <input
                                             type="radio"
                                             name="bratina"
-                                            ng-click="lost_something($index)"
-                                    />{{radioValue}}
+                                            ng-click="lost_something_index($index)"
+                                    />
                                 </label>
                             </li>
                         </ul>
@@ -40,7 +40,7 @@
 
             <div class="form-group">
                 <label for="comment">Description</label>
-                <textarea class="form-control" rows="5" id="comment"></textarea>
+                <textarea ng-model="description" class="form-control" rows="5" id="comment"></textarea>
             </div>
 
             <div >
