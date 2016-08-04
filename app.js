@@ -326,7 +326,7 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
         //magijom prosledjuje ove parametre
     $scope.onClick = function(marker, eventName, model) {
         for(i=0;i<$scope.markers.length;i++){
-            if(  $scope.markers[i] !== marker)
+            if( $scope.markers[i].id !== model.id)
                  $scope.markers[i].show=false;
         }
         model.show = !model.show;
