@@ -323,6 +323,15 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
     var markers = [];
 
 
+        //magijom prosledjuje ove parametre
+    $scope.onClick = function(marker, eventName, model) {
+        for(i=0;i<$scope.markers.length;i++){
+            if(  $scope.markers[i] !== marker)
+                 $scope.markers[i].show=false;
+        }
+        model.show = !model.show;
+    };
+
     $rootScope.refreshMap = function(){
         $http.post("db_lost_things.php").then(function(data){
 
@@ -330,11 +339,12 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
             for(i=0;i<array.length-1;i++){
 
                 var latlon = array[i].split(",");
-                console.log(latlon);
                 var marker = {
                     latitude: latlon[0],
                     longitude: latlon[1],
-                    id:i
+                    id:i,
+                    title:'finder: '+latlon[2]+' <br/> item name: '+latlon[3]+'<br/> category: '+$scope.inputs['category'][latlon[4]],
+                    show:false
                 };
                 markers.push(marker);
             }

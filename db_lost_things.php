@@ -9,6 +9,14 @@ include "db_connect.php";
          echo $row['latitude'];
          echo ',';
          echo $row['longitude'];
+         echo ',';
+         echo $row['nickname'];
+         echo ',';
+         echo $row['itemName'];
+         echo ',';
+         echo $row['category'];
+         echo ',';
+         echo $row['description'];
          echo '|';
      }
     $dbhandle->close();
