@@ -25,20 +25,24 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'main_ctrl'
         })
 
-        .state('home.lost',{
-            url:'/lost',
-            views: {   
-                '':{ templateUrl : 'partial-home-lost.html'},
+        .state('home.lost', {
+            url: '/lost',
 
-                'lostThings_view@home.lost' : {
-                    templateUrl : 'partial-home-lost-lostThings.html',
-                    controller: 'collapse_ctrl_L1'},
+            views: {
+                '': {templateUrl: 'partial-home-lost.html'},
 
-                'lostSomething_view@home.lost' :  {
-                    templateUrl : 'partial-home-lost-lostSomething.html',
-                    controller: 'collapse_ctrl_L2'}
+                'lostThings_view@home.lost': {
+                    templateUrl: 'partial-home-lost-lostThings.html',
+                    controller: 'collapse_ctrl_L1'
+
+                },
+
+                'lostSomething_view@home.lost': {
+                    templateUrl: 'partial-home-lost-lostSomething.html',
+                    controller: 'collapse_ctrl_L2'
+                }
             }
-            
+
         })
 
         .state('home.found',{
@@ -114,7 +118,7 @@ app.controller( 'chat', [ 'Messages', '$scope','Session',
         };
     } ] );
 
-app.controller('main_ctrl',function ($state, Messages,Session,$scope, $rootScope, $http, $uibModal) {
+app.controller('main_ctrl',function ($state, Messages,Session,$scope, $rootScope, $http, $uibModal, anchorSmoothScroll) {
 
     $rootScope.currentState = $state.$current;
 
@@ -141,12 +145,14 @@ app.controller('main_ctrl',function ($state, Messages,Session,$scope, $rootScope
 
         $rootScope.log = 'Log in';
         $rootScope.reg = 'Register';
+
     }else{
 
         Messages.user({ name : Session.get('nickname')});
         console.log("User:" +Session.get('nickname') );
         $rootScope.log = 'Log out';
         $rootScope.reg = '';
+
     }
 
     //odavde krece rutiranje za LOGIN
@@ -157,6 +163,9 @@ app.controller('main_ctrl',function ($state, Messages,Session,$scope, $rootScope
 
         if (sesija == null) {
             console.log(sesija);
+
+
+
             $uibModal.open({
 
                 templateUrl: 'login.html',
@@ -233,8 +242,76 @@ app.controller('main_ctrl',function ($state, Messages,Session,$scope, $rootScope
 
     };
 
+    $scope.gotoElement = function (eID){
+        // set the location.hash to the id of
+        // the element you wish to scroll to.
+       // $location.hash('bottom');
+
+        // call $anchorScroll()
+        anchorSmoothScroll.scrollTo(eID);
+
+    };
+
 
 });
+
+app.service('anchorSmoothScroll', function(){
+
+    this.scrollTo = function(eID) {
+
+        // This scrolling function
+        // is from http://www.itnewb.com/tutorial/Creating-the-Smooth-Scroll-Effect-with-JavaScript
+
+        var startY = currentYPosition();
+        var stopY = elmYPosition(eID);
+        var distance = stopY > startY ? stopY - startY : startY - stopY;
+        if (distance < 100) {
+            scrollTo(0, stopY); return;
+        }
+        console.log(distance);
+        var speed = Math.round(distance /100);
+        if (speed >= 20) speed = 20;
+        var step = 100;
+        var leapY = stopY > startY ? startY + step : startY - step;
+        var timer = 0;
+        if (stopY > startY) {
+            for ( var i=startY; i<stopY; i+=step ) {
+                setTimeout("window.scrollTo(0, "+leapY+")", 0);
+                leapY += step;
+                if (leapY > stopY) leapY = stopY;
+                timer++;
+            } return;
+        }
+        for ( var i=startY; i>stopY; i-=step ) {
+            setTimeout("window.scrollTo(0, "+leapY+")", 0);
+            leapY -= step; if (leapY < stopY) leapY = stopY; timer++;
+        }
+
+        function currentYPosition() {
+            // Firefox, Chrome, Opera, Safari
+            if (self.pageYOffset) return self.pageYOffset;
+            // Internet Explorer 6 - standards mode
+            if (document.documentElement && document.documentElement.scrollTop)
+                return document.documentElement.scrollTop;
+            // Internet Explorer 6, 7 and 8
+            if (document.body.scrollTop) return document.body.scrollTop;
+            return 0;
+        }
+
+        function elmYPosition(eID) {
+            var elm = document.getElementById(eID);
+            var y = elm.offsetTop;
+            var node = elm;
+            while (node.offsetParent && node.offsetParent != document.body) {
+                node = node.offsetParent;
+                y += node.offsetTop;
+            } return y;
+        }
+
+    };
+
+});
+
 app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
 
     $scope.map = { center: { latitude: 44.8206, longitude: 20.4622 }, zoom: 8 };
@@ -271,20 +348,28 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
 });
 
 app.controller('collapse_ctrl_L2', function ($scope,$http,Session,$rootScope) {
+
     if (Session.get('user') == null){
-        console.log("usao if");
-        $scope.logIn_warning="You need to ";
-        $scope.register_warning="Dont have an account? ";
-        $scope.logIn_anchor="Log in";
-        $scope.register_anchor="Register";
+
+        $rootScope.logIn_warning="You need to ";
+        $rootScope.register_warning="Dont have an account? ";
+        $rootScope.logIn_anchor="Log in";
+        $rootScope.register_anchor="Register";
 
     }else{
-        $scope.warning="";
-        $scope.logIn_anchor="";
+        $rootScope.logIn_warning="";
+        $rootScope.register_warning="";
+        $rootScope.logIn_anchor="";
+        $rootScope.register_anchor="";
+
     }
 
 
     $scope.map = { center: { latitude: 44.8206, longitude: 20.4622 }, zoom: 8 };
+
+    $scope.options = {
+        scrollwheel: false
+    };
 
     $scope.marker = {
         id: 0,
@@ -363,6 +448,14 @@ app.controller('collapse_ctrl_L2', function ($scope,$http,Session,$rootScope) {
 
     $scope.lost_something= function() {
 
+        var x = document.getElementsByName("bratina");
+        var bool=false;
+        for (i = 0; i < x.length; i++) {
+            if(x[i].checked){
+                bool=true;
+            }
+        }
+        if(!bool) return;
         if (Session.get('user') == null) {
 
         }
@@ -378,6 +471,12 @@ app.controller('collapse_ctrl_L2', function ($scope,$http,Session,$rootScope) {
             })
                 .then(function (user) {
                     $rootScope.refreshMap();
+                    $scope.gotoElement('lostThings');
+                    $scope.isCollapsed_L2=false;
+                    $rootScope.isCollapsed_L1 = true;
+                        console.log( $rootScope.isCollapsed_L2 );
+                    if($scope.isCollapsed_L1)$rootScope.showMap_lost_things=true;
+                    else $rootScope.showMap_lost_things=false;
                     // // treba da se doda samo popup uspesno dodavanje / neuspesno dodavanje, ali dodavanje radi &&
                     //     if(user.data=="wrong")
                     //     {
@@ -597,7 +696,11 @@ app.controller('login_success_ctrl', function ($scope, $uibModalInstance, $state
 
     $scope.exit = function () {
     console.log("login state: "+$rootScope.currentState);
-        $state.reload($rootScope.currentState);
+        // $state.reload($rootScope.currentState);
+        $rootScope.logIn_warning="";
+        $rootScope.register_warning="";
+        $rootScope.logIn_anchor="";
+        $rootScope.register_anchor="";
         $rootScope.reg = '';
         $uibModalInstance.close();
     }
@@ -606,7 +709,11 @@ app.controller('logout_success_ctrl', function ($scope, $uibModalInstance, $stat
 
     $scope.exit = function () {
         console.log("login state: "+$rootScope.currentState);
-        $state.reload($rootScope.currentState);
+        $rootScope.logIn_warning="You need to ";
+        $rootScope.register_warning="Dont have an account? ";
+        $rootScope.logIn_anchor="Log in";
+        $rootScope.register_anchor="Register";
+        // $state.reload($rootScope.currentState);
         $rootScope.reg = 'Register';
         $uibModalInstance.close();
     }
