@@ -5,7 +5,7 @@ $data = json_decode(file_get_contents("php://input"));
 $category = $dbhandle->real_escape_string($data->category);
 if(!is_numeric($category)){
     $query = sprintf("SELECT nickname,itemName,category,description,latitude,longitude FROM lostthings WHERE  itemName LIKE '%s%%'",
-                   mysql_real_escape_string($category));
+                   mysqli_real_escape_string($dbhandle,$category));
 }else
 if($category!=-1){
     $query = "SELECT nickname,itemName,category,description,latitude,longitude FROM lostthings WHERE  category='$category' ";
