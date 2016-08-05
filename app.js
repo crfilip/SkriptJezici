@@ -322,19 +322,26 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
     $scope.markers = [];
     var markers = [];
 
+    $scope.filter_map=function($index){
 
+        $rootScope.refreshMap($index);
+
+    }
         //magijom prosledjuje ove parametre
     $scope.onClick = function(marker, eventName, model) {
         for(i=0;i<$scope.markers.length;i++){
             if( $scope.markers[i].id !== model.id)
                  $scope.markers[i].show=false;
         }
+        console.log(model.show);
         model.show = !model.show;
     };
 
-    $rootScope.refreshMap = function(){
-        $http.post("db_lost_things.php").then(function(data){
+    $rootScope.refreshMap = function(category){
+        markers=[];
+        $http.post("db_lost_things.php",{'category':category}).then(function(data){
 
+            console.log(data.data);
             var array = data.data.split('|');
             for(i=0;i<array.length-1;i++){
 
@@ -348,11 +355,14 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
                 };
                 markers.push(marker);
             }
-        })
-        $scope.markers=markers;
-    }
+        });
+        console.log( markers);
 
-    $rootScope.refreshMap();
+        $scope.markers=markers;
+
+    };
+
+    $rootScope.refreshMap(-1);
 
 
 });
@@ -480,7 +490,7 @@ app.controller('collapse_ctrl_L2', function ($scope,$http,Session,$rootScope) {
                 'longitude': $scope.marker.coords.longitude
             })
                 .then(function (user) {
-                    $rootScope.refreshMap();
+                    $rootScope.refreshMap(-1);
                     $scope.gotoElement('lostThings');
                     $scope.isCollapsed_L2=false;
                     $rootScope.isCollapsed_L1 = true;
