@@ -3,13 +3,15 @@ include "db_connect.php";
 
 $data = json_decode(file_get_contents("php://input"));
 $category = $dbhandle->real_escape_string($data->category);
+if(!is_numeric($category)){
+    $query = sprintf("SELECT nickname,itemName,category,description,latitude,longitude FROM lostthings WHERE  itemName LIKE '%s%%'",
+                   mysql_real_escape_string($category));
+}else
 if($category!=-1){
     $query = "SELECT nickname,itemName,category,description,latitude,longitude FROM lostthings WHERE  category='$category' ";
 }else{
     $query = "SELECT nickname,itemName,category,description,latitude,longitude FROM lostthings";
 }
-
-    $count=0;
 
     $do_search=mysqli_query($dbhandle, $query);
      while ($row = mysqli_fetch_array($do_search))

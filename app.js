@@ -322,11 +322,22 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
     $scope.markers = [];
     var markers = [];
 
-    $scope.filter_map=function($index){
+    $rootScope.aa=function(){
+        console.log("aa");
+    };
 
+    $scope.filter_map=function($index){
+        console.log($index);
         $rootScope.refreshMap($index);
 
-    }
+    };
+
+    document.getElementById('search').onkeypress = function() {
+        setTimeout(function(){
+            $rootScope.refreshMap(document.getElementById('search').value);
+        },100)
+
+    };
         //magijom prosledjuje ove parametre
     $scope.onClick = function(marker, eventName, model) {
         for(i=0;i<$scope.markers.length;i++){
