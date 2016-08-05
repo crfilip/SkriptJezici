@@ -322,9 +322,6 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
     $scope.markers = [];
     var markers = [];
 
-    $rootScope.aa=function(){
-        console.log("aa");
-    };
 
     $scope.filter_map=function($index){
         console.log($index);
@@ -332,7 +329,10 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
 
     };
 
-    document.getElementById('search').onkeypress = function() {
+    document.getElementById('search').onkeydown = function() {
+        var ele = document.getElementsByName("filter");
+        for(var i=0;i<ele.length;i++)
+            ele[i].checked = false;
         setTimeout(function(){
             $rootScope.refreshMap(document.getElementById('search').value);
         },100)
