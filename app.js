@@ -329,6 +329,17 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
 
     };
 
+
+    document.getElementById('search').onclick = function() {
+        var ele = document.getElementsByName("filter");
+        for(var i=0;i<ele.length;i++)
+            ele[i].checked = false;
+        setTimeout(function(){
+            $rootScope.refreshMap(document.getElementById('search').value);
+        },100)
+
+    };
+
     document.getElementById('search').onkeydown = function() {
         var ele = document.getElementsByName("filter");
         for(var i=0;i<ele.length;i++)
