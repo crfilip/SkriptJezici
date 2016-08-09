@@ -36,8 +36,8 @@
     </br>
 
     <label ng-show="!chatValue" class="text-danger" style="font-size:18px;">You can live chat if you <a style="font-size:16px" ng-click="log_in_modal()">Log in</a></label>
-    <div >
-        <div ng-show="chatValue" ng-controller="chat" class="col-md-4 col-md-offset-4" style="border: 1px solid;">
+    <div>
+        <div ng-if="chatValue" ng-controller="chat" class="col-md-4 col-md-offset-4" style="border: 1px solid; height:400px;">
             <div ng-repeat="message in messages">
                 {{ message.user.name }}:
                 {{ message.data }}

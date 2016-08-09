@@ -369,10 +369,12 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
         //magijom prosledjuje ove parametre
     $scope.onClick = function(marker, eventName, model) {
         for(i=0;i<$scope.markers.length;i++) {
+
             if ($scope.markers[i].id !== model.id) {
                 $scope.markers[i].show = false;
             }
             else {
+
                 model.show = !model.show;
                 $scope.finder =  $scope.markers[model.id].finder;
                 $scope.itemName = $scope.markers[model.id].itemName;
@@ -390,13 +392,23 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
         markers=[];
         $http.post("db_lost_things.php",{'category':category}).then(function(data){
 
-            console.log(data.data);
+            console.log("data:" + data.data);
+
+
             var array = data.data.split('|');
+
+            console.log("array:" + array.length);
+
             for(i=0;i<array.length-1;i++){
 
-                var latlon = array[i].split(",");
+                console.log("data2:" + array[i]);
+
+                var latlon = array[i].split("~");
+
+                console.log("data3:" + latlon[5]);
 
                 var marker = {
+
                     latitude: latlon[0],
                     longitude: latlon[1],
                     id:i,
@@ -413,7 +425,7 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
 
 
         $scope.markers=markers;
-        // console.log("VOJIIIN : "+ $scope.markers);
+
 
     };
 
@@ -526,7 +538,7 @@ app.controller('collapse_ctrl_L2', function ($scope,$http,Session,$rootScope) {
                 'nickname': Session.get('nickname'),
                 'itemName': $scope.itemName,
                 'category': index,
-                'description': $scope.description = $scope.description +',', //zbog citanja iz baze
+                'description': $scope.description,
                 'latitude': $scope.marker.coords.latitude,
                 'longitude': $scope.marker.coords.longitude
             })
@@ -755,22 +767,25 @@ app.controller('login_modal_instance_ctrl', function (Messages,Session,$scope, $
 
 app.controller('login_success_ctrl', function ($scope, $uibModalInstance, $state, $rootScope) {
 
+    $rootScope.reg = '';
+    $rootScope.chatValue=true;
+
     $scope.exit = function () {
     console.log("login state: "+$rootScope.currentState);
-        $rootScope.reg = '';
-        $rootScope.chatValue=true;
+
         
         $uibModalInstance.close();
     }
 });
 app.controller('logout_success_ctrl', function ($scope, $uibModalInstance, $state, $rootScope) {
 
+    $rootScope.reg = 'Register';
+    $rootScope.chatValue=false;
+
     $scope.exit = function () {
         console.log("login state: "+$rootScope.currentState);
 
-        $rootScope.reg = 'Register';
-        $rootScope.chatValue=false;
-        
+
         
         $uibModalInstance.close();
     }

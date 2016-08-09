@@ -17,15 +17,15 @@ if($category!=-1){
      while ($row = mysqli_fetch_array($do_search))
      {
          echo $row['latitude'];
-         echo ',';
+         echo '~';
          echo $row['longitude'];
-         echo ',';
+         echo '~';
          echo $row['nickname'];
-         echo ',';
+         echo '~';
          echo $row['itemName'];
-         echo ',';
+         echo '~';
          echo $row['category'];
-         echo ',';
+         echo '~';
          echo $row['description'];
          echo '|';
      }
