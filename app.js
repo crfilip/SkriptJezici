@@ -141,10 +141,24 @@ app.controller('main_ctrl',function ($state, Messages,Session,$scope, $rootScope
     $rootScope.showMap_lost=false;
     $rootScope.showMap_lost_things=false;
 
+    // $scope.checkSession = function () {
+    //     var sesija = Session.get('user');
+    //
+    //     if(sesija==null)
+    //     {
+    //         console.log("sranje");
+    //         return false;
+    //     }else {
+    //         return true;
+    //     }
+    // }
+
     if(sesija==null){
 
         $rootScope.log = 'Log in';
         $rootScope.reg = 'Register';
+        $rootScope.chatValue = false;
+
 
     }else{
 
@@ -152,6 +166,7 @@ app.controller('main_ctrl',function ($state, Messages,Session,$scope, $rootScope
         console.log("User:" +Session.get('nickname') );
         $rootScope.log = 'Log out';
         $rootScope.reg = '';
+        $rootScope.chatValue = true;
 
     }
 
@@ -177,6 +192,7 @@ app.controller('main_ctrl',function ($state, Messages,Session,$scope, $rootScope
             Session.kill('user');
              $rootScope.log = 'Log in';
             $rootScope.reg = 'Register';
+
 
             $uibModal.open({
                 templateUrl: 'logout_success.html',
@@ -268,22 +284,19 @@ app.service('anchorSmoothScroll', function(){
         if (distance < 100) {
             scrollTo(0, stopY); return;
         }
-        console.log(distance);
-        var speed = Math.round(distance /100);
+        var speed = Math.round(distance / 250);
         if (speed >= 20) speed = 20;
-        var step = 100;
+        var step = Math.round(distance / 25);
         var leapY = stopY > startY ? startY + step : startY - step;
         var timer = 0;
         if (stopY > startY) {
             for ( var i=startY; i<stopY; i+=step ) {
-                setTimeout("window.scrollTo(0, "+leapY+")", 0);
-                leapY += step;
-                if (leapY > stopY) leapY = stopY;
-                timer++;
+                setTimeout("window.scrollTo(0, "+leapY+")", timer * speed);
+                leapY += step; if (leapY > stopY) leapY = stopY; timer++;
             } return;
         }
         for ( var i=startY; i>stopY; i-=step ) {
-            setTimeout("window.scrollTo(0, "+leapY+")", 0);
+            setTimeout("window.scrollTo(0, "+leapY+")", timer * speed);
             leapY -= step; if (leapY < stopY) leapY = stopY; timer++;
         }
 
@@ -305,7 +318,10 @@ app.service('anchorSmoothScroll', function(){
             while (node.offsetParent && node.offsetParent != document.body) {
                 node = node.offsetParent;
                 y += node.offsetTop;
-            } return y;
+            }
+            console.log("y "+y);
+            return y;
+
         }
 
     };
@@ -334,7 +350,8 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
         var ele = document.getElementsByName("filter");
         for(var i=0;i<ele.length;i++)
             ele[i].checked = false;
-        setTimeout(function(){
+
+       setTimeout(function(){
             $rootScope.refreshMap(document.getElementById('search').value);
         },100)
 
@@ -351,12 +368,22 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
     };
         //magijom prosledjuje ove parametre
     $scope.onClick = function(marker, eventName, model) {
-        for(i=0;i<$scope.markers.length;i++){
-            if( $scope.markers[i].id !== model.id)
-                 $scope.markers[i].show=false;
+        for(i=0;i<$scope.markers.length;i++) {
+            if ($scope.markers[i].id !== model.id) {
+                $scope.markers[i].show = false;
+            }
+            else {
+                model.show = !model.show;
+                $scope.finder =  $scope.markers[model.id].finder;
+                $scope.itemName = $scope.markers[model.id].itemName;
+                $scope.description = $scope.markers[model.id].description;
+
+            }
         }
-        console.log(model.show);
-        model.show = !model.show;
+
+
+
+
     };
 
     $rootScope.refreshMap = function(category){
@@ -368,19 +395,25 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
             for(i=0;i<array.length-1;i++){
 
                 var latlon = array[i].split(",");
+
                 var marker = {
                     latitude: latlon[0],
                     longitude: latlon[1],
                     id:i,
+                    finder : latlon[2],
+                    itemName : latlon[3],
+                    description: latlon[5],
                     title:'finder: '+latlon[2]+' <br/> item name: '+latlon[3]+'<br/> category: '+$scope.inputs['category'][latlon[4]],
+
                     show:false
                 };
                 markers.push(marker);
             }
         });
-        console.log( markers);
+
 
         $scope.markers=markers;
+        // console.log("VOJIIIN : "+ $scope.markers);
 
     };
 
@@ -391,20 +424,6 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
 
 app.controller('collapse_ctrl_L2', function ($scope,$http,Session,$rootScope) {
 
-    if (Session.get('user') == null){
-
-        $rootScope.logIn_warning="You need to ";
-        $rootScope.register_warning="Dont have an account? ";
-        $rootScope.logIn_anchor="Log in";
-        $rootScope.register_anchor="Register";
-
-    }else{
-        $rootScope.logIn_warning="";
-        $rootScope.register_warning="";
-        $rootScope.logIn_anchor="";
-        $rootScope.register_anchor="";
-
-    }
 
 
     $scope.map = { center: { latitude: 44.8206, longitude: 20.4622 }, zoom: 8 };
@@ -507,17 +526,17 @@ app.controller('collapse_ctrl_L2', function ($scope,$http,Session,$rootScope) {
                 'nickname': Session.get('nickname'),
                 'itemName': $scope.itemName,
                 'category': index,
-                'description': $scope.description,
+                'description': $scope.description = $scope.description +',', //zbog citanja iz baze
                 'latitude': $scope.marker.coords.latitude,
                 'longitude': $scope.marker.coords.longitude
             })
                 .then(function (user) {
                     $rootScope.refreshMap(-1);
                     $scope.gotoElement('lostThings');
-                    $scope.isCollapsed_L2=false;
+                    $rootScope.isCollapsed_L2=false;
                     $rootScope.isCollapsed_L1 = true;
                         console.log( $rootScope.isCollapsed_L2 );
-                    if($scope.isCollapsed_L1)$rootScope.showMap_lost_things=true;
+                    if($rootScope.isCollapsed_L1)$rootScope.showMap_lost_things=true;
                     else $rootScope.showMap_lost_things=false;
                     // // treba da se doda samo popup uspesno dodavanje / neuspesno dodavanje, ali dodavanje radi &&
                     //     if(user.data=="wrong")
@@ -738,12 +757,9 @@ app.controller('login_success_ctrl', function ($scope, $uibModalInstance, $state
 
     $scope.exit = function () {
     console.log("login state: "+$rootScope.currentState);
-        // $state.reload($rootScope.currentState);
-        $rootScope.logIn_warning="";
-        $rootScope.register_warning="";
-        $rootScope.logIn_anchor="";
-        $rootScope.register_anchor="";
         $rootScope.reg = '';
+        $rootScope.chatValue=true;
+        
         $uibModalInstance.close();
     }
 });
@@ -751,12 +767,11 @@ app.controller('logout_success_ctrl', function ($scope, $uibModalInstance, $stat
 
     $scope.exit = function () {
         console.log("login state: "+$rootScope.currentState);
-        $rootScope.logIn_warning="You need to ";
-        $rootScope.register_warning="Dont have an account? ";
-        $rootScope.logIn_anchor="Log in";
-        $rootScope.register_anchor="Register";
-        // $state.reload($rootScope.currentState);
+
         $rootScope.reg = 'Register';
+        $rootScope.chatValue=false;
+        
+        
         $uibModalInstance.close();
     }
 });

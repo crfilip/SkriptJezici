@@ -2,9 +2,9 @@
     <div >
         <h3><strong>You can report your findings in a form below</strong></h3>
 
-        <p  class="text-danger text-center" style="font-size:18px;">{{logIn_warning}}<a style="font-size:16px" ng-click="log_in_modal()">{{logIn_anchor}}</a></p>
-
-        <p  class="text-danger text-center" style="font-size:18px;">{{register_warning}}<a style="font-size:16px" ng-click="register_modal()">{{register_anchor}}</a></p>
+        <label  ng-show="!chatValue" class="text-danger text-center" style="font-size:18px;">You need to <a style="font-size:16px" ng-click="log_in_modal()">Log In</a></label>
+        </br>
+        <label ng-show="!chatValue" class="text-danger text-center" style="font-size:18px;">Dont have an account? <a style="font-size:16px" ng-click="register_modal()">Register</a></label>
 
 
     </div>
