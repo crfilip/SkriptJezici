@@ -16,8 +16,8 @@
         </li>
     </ul>
 </label>
-<div >
-    <ui-gmap-google-map ng-if="showMap_lost_things" center='map.center' zoom='map.zoom' draggable="true" options="options">
+<div  ng-if="showMap_lost_things">
+    <ui-gmap-google-map center='map.center' zoom='map.zoom' draggable="true" options="options">
         <ui-gmap-markers click="onClick" models="markers" coords="'self'" icon="'icon'">
             <ui-gmap-windows show="show">
                 <div ng-non-bindable>{{title}}</div>

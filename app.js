@@ -275,9 +275,6 @@ app.service('anchorSmoothScroll', function(){
 
     this.scrollTo = function(eID) {
 
-        // This scrolling function
-        // is from http://www.itnewb.com/tutorial/Creating-the-Smooth-Scroll-Effect-with-JavaScript
-
         var startY = currentYPosition();
         var stopY = elmYPosition(eID);
         var distance = stopY > startY ? stopY - startY : startY - stopY;
@@ -366,7 +363,7 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
         },100)
 
     };
-        //magijom prosledjuje ove parametre
+
     $scope.onClick = function(marker, eventName, model) {
         for(i=0;i<$scope.markers.length;i++) {
 
@@ -392,21 +389,11 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
         markers=[];
         $http.post("db_lost_things.php",{'category':category}).then(function(data){
 
-            console.log("data:" + data.data);
-
-
             var array = data.data.split('|');
-
-            console.log("array:" + array.length);
 
             for(i=0;i<array.length-1;i++){
 
-                console.log("data2:" + array[i]);
-
                 var latlon = array[i].split("~");
-
-                console.log("data3:" + latlon[5]);
-
                 var marker = {
 
                     latitude: latlon[0],
@@ -434,7 +421,7 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
 
 });
 
-app.controller('collapse_ctrl_L2', function ($scope,$http,Session,$rootScope) {
+app.controller('collapse_ctrl_L2', function ($scope,$http,Session,$rootScope,$timeout) {
 
 
 
@@ -543,13 +530,20 @@ app.controller('collapse_ctrl_L2', function ($scope,$http,Session,$rootScope) {
                 'longitude': $scope.marker.coords.longitude
             })
                 .then(function (user) {
-                    $rootScope.refreshMap(-1);
-                    $scope.gotoElement('lostThings');
+
+
                     $rootScope.isCollapsed_L2=false;
-                    $rootScope.isCollapsed_L1 = true;
-                        console.log( $rootScope.isCollapsed_L2 );
-                    if($rootScope.isCollapsed_L1)$rootScope.showMap_lost_things=true;
-                    else $rootScope.showMap_lost_things=false;
+                    $rootScope.refreshMap(-1);
+
+                    $timeout(function(){
+                        document.getElementById("lostThings").click();
+                    });
+
+                    //$scope.gotoElement('lostThings');
+
+                   // console.log("L1 kolaps:" + $rootScope.isCollapsed_L1);
+                   //  if($rootScope.isCollapsed_L1)$rootScope.showMap_lost_things=true;
+                   //  else $rootScope.showMap_lost_things=false;
                     // // treba da se doda samo popup uspesno dodavanje / neuspesno dodavanje, ali dodavanje radi &&
                     //     if(user.data=="wrong")
                     //     {
