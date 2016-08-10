@@ -532,11 +532,12 @@ app.controller('collapse_ctrl_L2', function ($scope,$http,Session,$rootScope,$ti
                 .then(function (user) {
 
 
-                    $rootScope.isCollapsed_L2=false;
+                    
                     $rootScope.refreshMap(-1);
 
                     $timeout(function(){
                         document.getElementById("lostThings").click();
+                        document.getElementById("lostSomething").click();
                     });
 
                     //$scope.gotoElement('lostThings');
