@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<h3>Lost Things</h3>
+<div class="col-md-4 col-md-offset-4">
 <input type="text" placeholder="Search" id="search">
-<label>all<input type="radio" name="filter" ng-click="filter_map(-1)"/></label>
+</div>
+<div  class="col-md-4 col-md-offset-4">
 <label class="form_padding_ls" ng-repeat="(typeKey, typeVal) in inputs">
     <ul>
         <li ng-repeat="value in typeVal">
@@ -16,15 +17,18 @@
         </li>
     </ul>
 </label>
-<div  ng-if="showMap_lost_things">
+</div>
+<div class="row">
+<div class="col-md-12" ng-if="showMap_lost_things" style="margin:5px;">
     <ui-gmap-google-map center='map.center' zoom='map.zoom' draggable="true" options="options">
-        <ui-gmap-markers click="onClick" models="markers" coords="'self'" icon="'icon'">
+        <ui-gmap-markers events="clickEventsObject" models="markers" coords="'self'" icon="'icon'">
             <ui-gmap-windows show="show">
                 <div ng-non-bindable>{{title}}</div>
             </ui-gmap-windows>
         </ui-gmap-markers>
 
     </ui-gmap-google-map>
+</div>
 </div>
 <div style="border: 3px solid" class="row">
 
@@ -36,8 +40,8 @@
     </br>
 
     <label ng-show="!chatValue" class="text-danger" style="font-size:18px;">You can live chat if you <a style="font-size:16px" ng-click="log_in_modal()">Log in</a></label>
-    <div>
-        <div ng-if="chatValue" ng-controller="chat" class="col-md-4 col-md-offset-4" style="border: 1px solid; height:400px;">
+    <div style="margin:15px;">
+        <div ng-if="chatValue" ng-controller="chat" class="col-md-4 col-md-offset-4" style="border: 1px solid; height:auto;">
             <div ng-repeat="message in messages">
                 {{ message.user.name }}:
                 {{ message.data }}

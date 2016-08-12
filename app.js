@@ -62,41 +62,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         })
     
 });
-//
-// app.provider('modalState', function($stateProvider) {
-//     var provider = this;
-//     var modalResult;
-//     this.$get = function() {
-//         return provider;
-//     };
-//     this.state = function(stateName, options) {
-//         var modalInstance;
-//         $stateProvider.state(stateName, {
-//             url: options.url,
-//             onEnter: ['$modal', '$state', function($modal, $state) {
-//                 modalInstance = $modal.open(options);
-//                 // When the modal uses $close({..}), the data (=result) will be assigned to the parent state as 'modalResult'.
-//                 modalInstance.result.then(function(result) {
-//                     modalResult = result;
-//                 }).finally(function() { // modal closes
-//                     if(modalResult) {
-//                         $state.get('^').modalResult = modalResult;
-//                     }
-//                     modalInstance = modalResult = null;
-//                     if ($state.$current.name === stateName) {
-//                         $state.go('^'); // go to parent state
-//                     }
-//                 });
-//             }],
-//             onExit: function() {
-//                 if (modalInstance) {
-//                     modalInstance.close();
-//                 }
-//             }
-//         });
-//         return provider;
-//     };
-// });
+
+
 
 //Chat controller, ubacio sam clear chat funkciju samo, inace ostaju poruke sacuvane u bazi iz API-a tako da uvek mozemo da im pristupimo
 app.controller( 'chat', [ 'Messages', '$scope','Session',
@@ -111,6 +78,7 @@ app.controller( 'chat', [ 'Messages', '$scope','Session',
         // Send Messages
         $scope.send = function() {
             Messages.send({ data : $scope.textbox });
+
         };
         $scope.clear = function() {
             $scope.messages.length = 0;
@@ -200,7 +168,7 @@ app.controller('main_ctrl',function ($state, Messages,Session,$scope, $rootScope
 
             })
         }
-    }
+    };
     //rutiranje za REGISTER
     $scope.register_modal = function () {
 
@@ -210,7 +178,7 @@ app.controller('main_ctrl',function ($state, Messages,Session,$scope, $rootScope
             templateUrl: 'register.html',
             controller: 'register_ctrl'
         })
-    }
+    };
 
 
 
@@ -364,7 +332,21 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
 
     };
 
-    $scope.onClick = function(marker, eventName, model) {
+    $scope.clickEventsObject = {
+        mouseover: onMouseOver,
+        click: onClick,
+        mouseout: onMouseOut
+    };
+
+    function onClick(marker, eventName, model) {
+        console.log("mouseClick");
+        $scope.finder =  $scope.markers[model.id].finder;
+        $scope.itemName = $scope.markers[model.id].itemName;
+        $scope.description = $scope.markers[model.id].description;
+    }
+
+    function onMouseOver (marker, eventName, model) {
+        console.log("mouseOver");
         for(i=0;i<$scope.markers.length;i++) {
 
             if ($scope.markers[i].id !== model.id) {
@@ -372,21 +354,21 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
             }
             else {
 
-                model.show = !model.show;
-                $scope.finder =  $scope.markers[model.id].finder;
-                $scope.itemName = $scope.markers[model.id].itemName;
-                $scope.description = $scope.markers[model.id].description;
+                model.show = true;
 
             }
         }
 
+    }
 
-
-
-    };
+    function onMouseOut(marker, eventName, model)
+    {
+        model.show = false;
+    }
 
     $rootScope.refreshMap = function(category){
         markers=[];
+
         $http.post("db_lost_things.php",{'category':category}).then(function(data){
 
             var array = data.data.split('|');
@@ -534,7 +516,6 @@ app.controller('collapse_ctrl_L2', function ($scope,$http,Session,$rootScope,$ti
 
                     $rootScope.isCollapsed_L2=false;
                     $rootScope.refreshMap(-1);
-
                     $timeout(function(){
                         document.getElementById("lostThings").click();
                     });
