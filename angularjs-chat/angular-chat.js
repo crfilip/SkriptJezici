@@ -44,7 +44,7 @@ if (typeof(exports) !== 'undefined') exports.chat = angular.module('chat');
 // Messages it's important to remember that you can
 //          be deprived of your sanity listening to U2.
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-angular.module('chat').service( 'Messages', [ 'ChatCore', function(ChatCore) {
+angular.module('chat').service( 'Messages', [ 'ChatCore','$rootScope', function(ChatCore,$rootScope) {
     var Messages = this;
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -52,7 +52,6 @@ angular.module('chat').service( 'Messages', [ 'ChatCore', function(ChatCore) {
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     Messages.send = function(message) {
         if (!message.data) return;
-        console.log("kome:"+message.to);
         ChatCore.publish({
             channel : message.to || 'global'
         ,   message : message.data
@@ -64,26 +63,30 @@ angular.module('chat').service( 'Messages', [ 'ChatCore', function(ChatCore) {
     // Receive Messages
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     Messages.receive = function(fn) {
+
          function receiver(response) {
              response.data.m.forEach(function(msg){
                 // Ignore messages without User Data
                 // TODO
                 if (!(msg.d && msg.u && msg.u.id)) return;
-                console.log("primam:"+ChatCore.user().id );
-                fn({
-                    data : msg.d
-                ,   id   : msg.p.t
-                ,   user : msg.u
-                ,   self : msg.u.id == ChatCore.user().id
-                });
+                if ($rootScope.finder == msg.u.id){
+                    fn({
+                        data : msg.d
+                        ,   id   : msg.p.t
+                        ,   user : msg.u
+                        ,   self : msg.u.id == ChatCore.user().id
+                    });
+                }
+
              });
 
          }
 
          Messages.subscription = ChatCore.subscribe({
-            channels : [ 'global', ChatCore.user().id ].join(','),
+            channels : [ 'global', ChatCore.user().id].join(','),
             message  : receiver
          });
+
     };
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -141,8 +144,7 @@ angular.module('chat').service( 'ChatCore', [ '$http', 'config', function(
         ,   success : function(){}
         ,   fail    : function(){}
         };
-
-// 
+        
         request.url = [
             'https://pubsub.pubnub.com'
         ,   '/publish/', pubkey
@@ -183,7 +185,7 @@ angular.module('chat').service( 'ChatCore', [ '$http', 'config', function(
         if (groups) request.params['channel-group'] = groups;
 
         // Subscribe Loop
-        function next(response) { 
+        function next(response) {
             if (stop) return;
             if (response) {
                 timetoken = timetoken == '0' ? 1000 : response.data.t.t;
@@ -212,7 +214,9 @@ angular.module('chat').service( 'ChatCore', [ '$http', 'config', function(
 
         // Allow Cancelling Subscriptions
         return {
-            unsubscribe : unsubscribe
+            unsubscribe : unsubscribe,
+            channels : channels,
+            next : next
         };
     };
 } ] );

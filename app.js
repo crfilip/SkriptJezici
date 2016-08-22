@@ -66,22 +66,24 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 
 
 //Chat controller, ubacio sam clear chat funkciju samo, inace ostaju poruke sacuvane u bazi iz API-a tako da uvek mozemo da im pristupimo
-app.controller( 'chat', [ 'Messages', '$scope','Session',
+app.controller( 'chat', [ 'Messages','$rootScope', '$scope','Session',
     function( Messages, $scope, $rootScope,Session ) {
         // Message Inbox
         $scope.messages = [];
         // Receive Messages
-        Messages.receive(function(message){
-            $scope.messages.push(message);
-
-
-            console.log("sadrzaj :"+message.data);
-        });
+        // Messages.receive(function(message){
+        //     console.log(message);
+        //
+        //         $scope.messages.push(message);
+        //
+        //
+        // });
 
         // Send Messages
         $scope.send = function() {
-            Messages.send({ data : $scope.textbox, to : $scope.finder });
 
+            Messages.send({ data : $rootScope.textbox, to : $rootScope.finder });
+            // Messages.send({ data : $rootScope.textbox, to : Messages.user().id });
         };
         $scope.clear = function() {
             $scope.messages.length = 0;
@@ -343,10 +345,15 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope,Messages) 
 
     function onClick(marker, eventName, model) {
         console.log("mouseClick");
+        $scope.clear();
+        Messages.receive(function(message){
+            $scope.messages.push(message);
+        });
 
-        $scope.finder =  $scope.markers[model.id].finder;
+        $rootScope.finder =  $scope.markers[model.id].finder;
         $scope.itemName = $scope.markers[model.id].itemName;
         $scope.description = $scope.markers[model.id].description;
+
     }
 
     function onMouseOver (marker, eventName, model) {
