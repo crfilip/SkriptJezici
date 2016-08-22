@@ -12,7 +12,7 @@ var app = angular.module('LFapp', ['ui.router','ui.bootstrap', 'ngAnimate', 'uiG
     }
 } );
 
-//nemoj pusovati jebeni workspace, jeeeeebiii gaaaaa
+
 app.config(function ($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/home');
@@ -73,11 +73,14 @@ app.controller( 'chat', [ 'Messages', '$scope','Session',
         // Receive Messages
         Messages.receive(function(message){
             $scope.messages.push(message);
+
+
+            console.log("sadrzaj :"+message.data);
         });
 
         // Send Messages
         $scope.send = function() {
-            Messages.send({ data : $scope.textbox });
+            Messages.send({ data : $scope.textbox, to : $scope.finder });
 
         };
         $scope.clear = function() {
@@ -131,7 +134,7 @@ app.controller('main_ctrl',function ($state, Messages,Session,$scope, $rootScope
     }else{
 
         Messages.user({ name : Session.get('nickname')});
-        console.log("User:" +Session.get('nickname') );
+        Messages.user().id=Session.get('nickname');
         $rootScope.log = 'Log out';
         $rootScope.reg = '';
         $rootScope.chatValue = true;
@@ -293,7 +296,7 @@ app.service('anchorSmoothScroll', function(){
 
 });
 
-app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
+app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope,Messages) {
 
     $scope.map = { center: { latitude: 44.8206, longitude: 20.4622 }, zoom: 8 };
 
@@ -340,6 +343,7 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope) {
 
     function onClick(marker, eventName, model) {
         console.log("mouseClick");
+
         $scope.finder =  $scope.markers[model.id].finder;
         $scope.itemName = $scope.markers[model.id].itemName;
         $scope.description = $scope.markers[model.id].description;
@@ -721,6 +725,7 @@ app.controller('login_modal_instance_ctrl', function (Messages,Session,$scope, $
                     $rootScope.log = 'Log out';
 
                     Messages.user({ name : Session.get('nickname')});
+                    Messages.user().id=Session.get('nickname');
                     console.log("User:" +Session.get('nickname') );
                     $uibModalInstance.close();
 

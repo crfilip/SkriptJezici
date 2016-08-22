@@ -52,7 +52,7 @@ angular.module('chat').service( 'Messages', [ 'ChatCore', function(ChatCore) {
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     Messages.send = function(message) {
         if (!message.data) return;
-
+        console.log("kome:"+message.to);
         ChatCore.publish({
             channel : message.to || 'global'
         ,   message : message.data
@@ -69,6 +69,7 @@ angular.module('chat').service( 'Messages', [ 'ChatCore', function(ChatCore) {
                 // Ignore messages without User Data
                 // TODO
                 if (!(msg.d && msg.u && msg.u.id)) return;
+                console.log("primam:"+ChatCore.user().id );
                 fn({
                     data : msg.d
                 ,   id   : msg.p.t
@@ -76,6 +77,7 @@ angular.module('chat').service( 'Messages', [ 'ChatCore', function(ChatCore) {
                 ,   self : msg.u.id == ChatCore.user().id
                 });
              });
+
          }
 
          Messages.subscription = ChatCore.subscribe({
