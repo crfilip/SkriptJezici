@@ -51,6 +51,7 @@ angular.module('chat').service( 'Messages', [ 'ChatCore','$rootScope', function(
     // Send Messages
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     Messages.send = function(message) {
+
         if (!message.data) return;
         ChatCore.publish({
             channel : message.to || 'global'
@@ -69,7 +70,8 @@ angular.module('chat').service( 'Messages', [ 'ChatCore','$rootScope', function(
                 // Ignore messages without User Data
                 // TODO
                 if (!(msg.d && msg.u && msg.u.id)) return;
-                if ($rootScope.finder == msg.u.id){
+
+                if ($rootScope.finder == msg.u.id || msg.u.id == Messages.user().id){
                     fn({
                         data : msg.d
                         ,   id   : msg.p.t
@@ -144,7 +146,7 @@ angular.module('chat').service( 'ChatCore', [ '$http', 'config', function(
         ,   success : function(){}
         ,   fail    : function(){}
         };
-        
+
         request.url = [
             'https://pubsub.pubnub.com'
         ,   '/publish/', pubkey
