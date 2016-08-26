@@ -70,8 +70,9 @@ angular.module('chat').service( 'Messages', [ 'ChatCore','$rootScope', function(
                 // Ignore messages without User Data
                 // TODO
                 if (!(msg.d && msg.u && msg.u.id)) return;
-
-                if ($rootScope.finder == msg.u.id || msg.u.id == Messages.user().id){
+                console.log($rootScope.finder !=Messages.user().id);
+                if (($rootScope.finder !=Messages.user().id) && ($rootScope.finder == msg.u.id || msg.u.id == Messages.user().id  )){
+                    console.log("prosao konj");
                     fn({
                         data : msg.d
                         ,   id   : msg.p.t
