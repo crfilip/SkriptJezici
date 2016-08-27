@@ -69,17 +69,34 @@ angular.module('chat').service( 'Messages', [ 'ChatCore','$rootScope', function(
              response.data.m.forEach(function(msg){
                 // Ignore messages without User Data
                 // TODO
+                 console.log("brda");
                 if (!(msg.d && msg.u && msg.u.id)) return;
-                console.log($rootScope.finder !=Messages.user().id);
-                if (($rootScope.finder !=Messages.user().id) && ($rootScope.finder == msg.u.id || msg.u.id == Messages.user().id  )){
-                    console.log("prosao konj");
-                    fn({
-                        data : msg.d
-                        ,   id   : msg.p.t
-                        ,   user : msg.u
-                        ,   self : msg.u.id == ChatCore.user().id
-                    });
-                }
+                var niz = msg.d.split("~");
+                 var fajnder = niz[0];
+                 msg.d = niz[1];
+                 if(fajnder == ""){
+                     if ($rootScope.finder !=Messages.user().id && $rootScope.finder == msg.u.id ){
+                         console.log("prosao konj");
+                         fn({
+                             data : msg.d
+                             ,   id   : msg.p.t
+                             ,   user : msg.u
+                             ,   self : msg.u.id == ChatCore.user().id
+                         });
+                     }
+                 }else {
+                     if (($rootScope.finder !=Messages.user().id) && ( $rootScope.finder == fajnder )){
+                         console.log("prosao konj");
+                         fn({
+                             data : msg.d
+                             ,   id   : msg.p.t
+                             ,   user : msg.u
+                             ,   self : msg.u.id == ChatCore.user().id
+                         });
+                     }
+                 }
+
+
 
              });
 

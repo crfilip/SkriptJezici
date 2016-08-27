@@ -81,9 +81,8 @@ app.controller( 'chat', [ 'Messages','$rootScope', '$scope','Session',
 
         // Send Messages
         $scope.send = function() {
-
-            Messages.send({ data : $rootScope.textbox, to : $rootScope.finder });
-            Messages.send({ data : $rootScope.textbox, to : Messages.user().id });
+            Messages.send({ data : "~"+$rootScope.textbox, to : $rootScope.finder });
+            Messages.send({ data : $rootScope.finder+"~"+$rootScope.textbox, to : Messages.user().id });
         };
         $scope.clear = function() {
             $scope.messages.length = 0;
