@@ -63,29 +63,45 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     
 });
 
-
+app.filter('poruka', function() {
+    return function(input) {
+        input = input || '';
+        var niz= input.split('~');
+        // conditional based on optional argument
+        return niz[1];
+    };
+});
 
 //Chat controller, ubacio sam clear chat funkciju samo, inace ostaju poruke sacuvane u bazi iz API-a tako da uvek mozemo da im pristupimo
 app.controller( 'chat', [ 'Messages','$rootScope', '$scope','Session',
     function( Messages, $scope, $rootScope,Session ) {
         // Message Inbox
-        $scope.messages = [];
+        $scope.allMessages = [];
         // Receive Messages
         // Messages.receive(function(message){
         //     console.log(message);
         //
-        //         $scope.messages.push(message);
+        //         $rootScope.messages.push(message);
         //
         //
         // });
-
+        Messages.receive(function(message){
+            $scope.allMessages.push(message);
+            console.log("received ");
+            console.log(message);
+        });
         // Send Messages
         $scope.send = function() {
-            Messages.send({ data : "~"+$rootScope.textbox, to : $rootScope.finder });
-            Messages.send({ data : $rootScope.finder+"~"+$rootScope.textbox, to : Messages.user().id });
+            if($rootScope.finder!=Messages.user().id ){
+                Messages.send({ data : "~"+$rootScope.textbox, to : $rootScope.finder });
+                Messages.send({ data : $rootScope.finder+"~"+$rootScope.textbox, to : Messages.user().id });
+                $rootScope.filterMessages();
+                console.log("iznad mene filter");
+            }
+
         };
         $scope.clear = function() {
-            $scope.messages.length = 0;
+            $scope.allMessages.length = 0;
 
         };
     } ] );
@@ -94,7 +110,7 @@ app.controller('main_ctrl',function ($state, Messages,Session,$scope, $rootScope
 
     $rootScope.currentState = $state.$current;
 
-
+    $rootScope.messages = [];
     $rootScope.$on('$stateChangeStart', function(event, to, toParams, from) {
 
         $rootScope.previousState = from.name;
@@ -342,17 +358,50 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope,Messages) 
         mouseout: onMouseOut
     };
 
-    function onClick(marker, eventName, model) {
-        console.log("mouseClick");
-        $scope.clear();
-        Messages.receive(function(message){
-            $scope.messages.push(message);
-        });
+  $rootScope.filterMessages = function(){
+        console.log( $rootScope.allMessages);
+        $rootScope.messages.length = 0;
+        $scope.allMessages.forEach(function(msg){
+            // Ignore messages without User Data
+            // TODO
+            if (!(msg.data && msg.user && msg.user.id)) return;
+            var niz = msg.data.split("~");
+            var fajnder = niz[0];
+            var data = niz[1];
+            if(fajnder == ""){
 
+                if ($rootScope.finder !=Messages.user().id && $rootScope.finder == msg.user.id ){
+                    $rootScope.messages.push({
+                        data : msg.data
+                        ,   id   : msg.id
+                        ,   user : msg.user
+                        ,   self : msg.user.id == Messages.user().id
+                    });
+                }
+            }else {
+                if (($rootScope.finder !=Messages.user().id) && ( $rootScope.finder == fajnder )){
+                    console.log("MIPIMO");
+                    $rootScope.messages.push({
+                        data : msg.data
+                        ,   id   : msg.id
+                        ,   user : msg.user
+                        ,   self : msg.user.id == Messages.user().id
+                    });
+                }
+            }
+
+
+
+        });
+    }
+    
+    function onClick(marker, eventName, model) {
+
+        Messages.subscription.next();
         $rootScope.finder =  $scope.markers[model.id].finder;
         $scope.itemName = $scope.markers[model.id].itemName;
         $scope.description = $scope.markers[model.id].description;
-
+        $rootScope.filterMessages();
     }
 
     function onMouseOver (marker, eventName, model) {
