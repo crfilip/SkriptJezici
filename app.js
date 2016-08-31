@@ -63,15 +63,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     
 });
 
-app.filter('poruka', function() {
-    return function(input) {
-        input = input || '';
-        var niz= input.split('~');
-        // conditional based on optional argument
-        return niz[1];
-    };
-});
-
 //Chat controller, ubacio sam clear chat funkciju samo, inace ostaju poruke sacuvane u bazi iz API-a tako da uvek mozemo da im pristupimo
 app.controller( 'chat', [ '$http','Messages','$rootScope', '$scope','Session',
     function( $http,Messages, $scope, $rootScope,Session ) {
@@ -99,7 +90,7 @@ app.controller( 'chat', [ '$http','Messages','$rootScope', '$scope','Session',
         };
 
         $scope.send = function() {
-            //alert($("#MyChatMessages").value);
+
 
             if($rootScope.finder!=Messages.user().id ){
                 if( $rootScope.chatUsers!==undefined){
@@ -109,10 +100,13 @@ app.controller( 'chat', [ '$http','Messages','$rootScope', '$scope','Session',
                             'finder': $rootScope.finder
                         })
                             .then(function (data) {
-                                console.log(data);
+                                if(data.data==="Success"){
+                                    $rootScope.chatUsers.push($rootScope.finder);
+                                }
                             });
 
                     }
+                    $("#MyChatMessages").val("");
                 }
 
                 Messages.send({ data : "~"+$rootScope.textbox, to : $rootScope.finder });
@@ -151,7 +145,7 @@ app.controller('main_ctrl',function ($state, Messages,Session,$scope, $rootScope
                 }
             }else {
                 if (($rootScope.finder !=Messages.user().id) && ( $rootScope.finder == fajnder )){
-                    console.log("MIPIMO");
+                   
                     $rootScope.messages.push({
                         data : msg.data
                         ,   id   : msg.id
@@ -471,6 +465,8 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope,Messages) 
         $scope.itemName = $scope.markers[model.id].itemName;
         $scope.description = $scope.markers[model.id].description;
         $rootScope.filterMessages();
+
+
     }
 
     function onMouseOver (marker, eventName, model) {
@@ -850,8 +846,13 @@ app.controller('login_success_ctrl', function (Messages,$http,$scope, $uibModalI
         'user': Messages.user().id
     })
         .then(function (data) {
-            console.log("datara");
-            console.log(data);
+            $rootScope.chatUsers.length=0;
+            var niz = data.data.split("|");
+            niz.forEach(function(usr){
+                if(usr!==Messages.user().id && usr!==""){
+                    $rootScope.chatUsers.push(usr);
+                }
+            });
         });
 
     $scope.exit = function () {
