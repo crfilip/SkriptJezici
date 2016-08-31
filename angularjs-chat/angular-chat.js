@@ -63,48 +63,6 @@ angular.module('chat').service( 'Messages', [ 'ChatCore','$rootScope', function(
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     // Receive Messages
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    // Messages.receive = function(fn) {
-    //
-    //      function receiver(response) {
-    //          response.data.m.forEach(function(msg){
-    //             // Ignore messages without User Data
-    //             // TODO
-    //             if (!(msg.d && msg.u && msg.u.id)) return;
-    //             var niz = msg.d.split("~");
-    //              var fajnder = niz[0];
-    //              msg.d = niz[1];
-    //              if(fajnder == ""){
-    //                  if ($rootScope.finder !=Messages.user().id && $rootScope.finder == msg.u.id ){
-    //                      fn({
-    //                          data : msg.d
-    //                          ,   id   : msg.p.t
-    //                          ,   user : msg.u
-    //                          ,   self : msg.u.id == ChatCore.user().id
-    //                      });
-    //                  }
-    //              }else {
-    //                  if (($rootScope.finder !=Messages.user().id) && ( $rootScope.finder == fajnder )){
-    //                      fn({
-    //                          data : msg.d
-    //                          ,   id   : msg.p.t
-    //                          ,   user : msg.u
-    //                          ,   self : msg.u.id == ChatCore.user().id
-    //                      });
-    //                  }
-    //              }
-    //
-    //
-    //
-    //          });
-    //
-    //      }
-    //
-    //      Messages.subscription = ChatCore.subscribe({
-    //         channels : [ 'global', ChatCore.user().id].join(','),
-    //         message  : receiver
-    //      });
-    //
-    // };
 
     Messages.receive = function(fn) {
         function receiver(response) {
@@ -226,7 +184,7 @@ angular.module('chat').service( 'ChatCore', [ '$http', 'config', function(
 
         // Subscribe Loop
         function next(response) {
-
+            console.log("loop");
             if (stop) return;
             if (response) {
                 timetoken = timetoken == '0' ? 1000 : response.data.t.t;

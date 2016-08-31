@@ -43,8 +43,21 @@
 
             <div ui-view></div>
         </div>
+        <button class="chat" ng-show="chatboxValue"  ng-click="chat_button();" >Chat</button>
+        <div ng-controller="chat" class='chat-box' ng-show="chatShow" >
+            <div class="chat-available-users" >
+                <div ng-repeat="user in chatUsers"><a ng-click="chatWith(user)">{{user}}</a></div>
+            </div>
+                 <div class='chat-box-messages'></div>
+                 <div class='my-chat-messages form-group'>
+                     <form ng-submit='send()'>
+                         <input ng-model='textbox' type='text' class='form-control' id='MyChatMessages'>
+                        <button type='submit' class='submit-chat'>Send</button>
+                         </form>
+                     </div>
+                 </div>
 
-    </div>
+     </div>
 
 </div>
 

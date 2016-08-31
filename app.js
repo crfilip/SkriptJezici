@@ -73,10 +73,12 @@ app.filter('poruka', function() {
 });
 
 //Chat controller, ubacio sam clear chat funkciju samo, inace ostaju poruke sacuvane u bazi iz API-a tako da uvek mozemo da im pristupimo
-app.controller( 'chat', [ 'Messages','$rootScope', '$scope','Session',
-    function( Messages, $scope, $rootScope,Session ) {
+app.controller( 'chat', [ '$http','Messages','$rootScope', '$scope','Session',
+    function( $http,Messages, $scope, $rootScope,Session ) {
+
         // Message Inbox
         $scope.allMessages = [];
+
         // Receive Messages
         // Messages.receive(function(message){
         //     console.log(message);
@@ -91,23 +93,84 @@ app.controller( 'chat', [ 'Messages','$rootScope', '$scope','Session',
             console.log(message);
         });
         // Send Messages
-        $scope.send = function() {
-            if($rootScope.finder!=Messages.user().id ){
-                Messages.send({ data : "~"+$rootScope.textbox, to : $rootScope.finder });
-                Messages.send({ data : $rootScope.finder+"~"+$rootScope.textbox, to : Messages.user().id });
-                $rootScope.filterMessages();
-                console.log("iznad mene filter");
-            }
-
-        };
         $scope.clear = function() {
             $scope.allMessages.length = 0;
 
         };
+
+        $scope.send = function() {
+            //alert($("#MyChatMessages").value);
+
+            if($rootScope.finder!=Messages.user().id ){
+                if( $rootScope.chatUsers!==undefined){
+                    if( !$rootScope.chatUsers.includes($rootScope.finder)){
+                        $http.post("openChat.php", {
+                            'user': Messages.user().id,
+                            'finder': $rootScope.finder
+                        })
+                            .then(function (data) {
+                                console.log(data);
+                            });
+
+                    }
+                }
+
+                Messages.send({ data : "~"+$rootScope.textbox, to : $rootScope.finder });
+                Messages.send({ data : $rootScope.finder+"~"+$rootScope.textbox, to : Messages.user().id });
+                $rootScope.filterMessages();
+
+                console.log("iznad mene filter");
+            }
+
+        };
     } ] );
+
 
 app.controller('main_ctrl',function ($state, Messages,Session,$scope, $rootScope, $http, $uibModal, anchorSmoothScroll) {
 
+    $rootScope.filterMessages = function(){
+        console.log( $scope.allMessages);
+        $rootScope.messages.length = 0;
+        var str="";
+        $scope.allMessages.forEach(function(msg){
+            // Ignore messages without User Data
+            // TODO
+            if (!(msg.data && msg.user && msg.user.id)) return;
+            var niz = msg.data.split("~");
+            var fajnder = niz[0];
+            var data = niz[1];
+            if(fajnder == ""){
+
+                if ($rootScope.finder !=Messages.user().id && $rootScope.finder == msg.user.id ){
+                    $rootScope.messages.push({
+                        data : msg.data
+                        ,   id   : msg.id
+                        ,   user : msg.user
+                        ,   self : msg.user.id == Messages.user().id
+                    });
+                }
+            }else {
+                if (($rootScope.finder !=Messages.user().id) && ( $rootScope.finder == fajnder )){
+                    console.log("MIPIMO");
+                    $rootScope.messages.push({
+                        data : msg.data
+                        ,   id   : msg.id
+                        ,   user : msg.user
+                        ,   self : msg.user.id == Messages.user().id
+                    });
+                }
+            }
+
+
+
+        });
+        $rootScope.messages.forEach(function(msg){
+            var conc = msg.data.split("~");
+            str+=msg.user.name+":"+conc[1]+"</br>";
+        });
+        $(".chat-box-messages").html(str);
+    }
+    $rootScope.chatUsers = [];
     $rootScope.currentState = $state.$current;
 
     $rootScope.messages = [];
@@ -146,6 +209,8 @@ app.controller('main_ctrl',function ($state, Messages,Session,$scope, $rootScope
         $rootScope.log = 'Log in';
         $rootScope.reg = 'Register';
         $rootScope.chatValue = false;
+        $rootScope.chatboxValue = false;
+        $rootScope.chatShow = false;
 
 
     }else{
@@ -155,9 +220,50 @@ app.controller('main_ctrl',function ($state, Messages,Session,$scope, $rootScope
         $rootScope.log = 'Log out';
         $rootScope.reg = '';
         $rootScope.chatValue = true;
+        $rootScope.chatboxValue = true;
+        // $rootScope.chatShow = true;
+        $http.post("checkChat.php", {
+            'user': Messages.user().id
+        })
+            .then(function (data) {
+                var niz = data.data.split("|");
+                niz.forEach(function(usr){
+                    if(usr!==Messages.user().id && usr!==""){
+                        $rootScope.chatUsers.push(usr);
+                    }
+                });
+            });
 
     }
 
+    $scope.chatWith=function(who){
+        $rootScope.finder = who;
+        $rootScope.filterMessages();
+
+    };
+
+    $scope.chat_button = function () {
+
+
+       // $(".chat").hasClass("collapsed-chat")?$(".chat").removeClass("collapsed-chat"):$(".chat").addClass("collapsed-chat");
+
+        $rootScope.chatboxValue=false;
+        $rootScope.chatShow = true;
+            // $(".chat").replaceWith("<div class='chat-box' >" +
+            //     "<div class='chat-box-messages'></div>" +
+            //     " <div class='my-chat-messages form-group'>" +
+            //     "<form ng-submit='send()'>" +
+            //     "<input ng-model='textbox' type='text' class='form-control' id='MyChatMessages'>" +
+            //     "<button type='submit' class='submit-chat'>Send</button>" +
+            //     "</form>" +
+            //     "</div>" +
+            //     "</div>");
+
+            // str= $(".submit-chat").text();
+
+
+
+    }
     //odavde krece rutiranje za LOGIN
     $scope.log_in_modal = function () {
 
@@ -358,46 +464,9 @@ app.controller( 'collapse_ctrl_L1', function ($scope,$http,$rootScope,Messages) 
         mouseout: onMouseOut
     };
 
-  $rootScope.filterMessages = function(){
-        console.log( $rootScope.allMessages);
-        $rootScope.messages.length = 0;
-        $scope.allMessages.forEach(function(msg){
-            // Ignore messages without User Data
-            // TODO
-            if (!(msg.data && msg.user && msg.user.id)) return;
-            var niz = msg.data.split("~");
-            var fajnder = niz[0];
-            var data = niz[1];
-            if(fajnder == ""){
-
-                if ($rootScope.finder !=Messages.user().id && $rootScope.finder == msg.user.id ){
-                    $rootScope.messages.push({
-                        data : msg.data
-                        ,   id   : msg.id
-                        ,   user : msg.user
-                        ,   self : msg.user.id == Messages.user().id
-                    });
-                }
-            }else {
-                if (($rootScope.finder !=Messages.user().id) && ( $rootScope.finder == fajnder )){
-                    console.log("MIPIMO");
-                    $rootScope.messages.push({
-                        data : msg.data
-                        ,   id   : msg.id
-                        ,   user : msg.user
-                        ,   self : msg.user.id == Messages.user().id
-                    });
-                }
-            }
-
-
-
-        });
-    }
     
     function onClick(marker, eventName, model) {
 
-        Messages.subscription.next();
         $rootScope.finder =  $scope.markers[model.id].finder;
         $scope.itemName = $scope.markers[model.id].itemName;
         $scope.description = $scope.markers[model.id].description;
@@ -580,36 +649,6 @@ app.controller('collapse_ctrl_L2', function ($scope,$http,Session,$rootScope,$ti
                         document.getElementById("lostSomething").click();
                     });
 
-                    //$scope.gotoElement('lostThings');
-
-                   // console.log("L1 kolaps:" + $rootScope.isCollapsed_L1);
-                   //  if($rootScope.isCollapsed_L1)$rootScope.showMap_lost_things=true;
-                   //  else $rootScope.showMap_lost_things=false;
-                    // // treba da se doda samo popup uspesno dodavanje / neuspesno dodavanje, ali dodavanje radi &&
-                    //     if(user.data=="wrong")
-                    //     {
-                    //         ;
-                    //     }
-                    //     else {
-                    //
-                    //         var fields = user.data.split(" ");
-                    //         console.log(fields[0]);
-                    //         Session.set('user',fields[1]);
-                    //         Session.set('log',"Log out");
-                    //         Session.set('nickname',fields[0]);
-                    //         $rootScope.nickname = fields[0];
-                    //         $rootScope.log = 'Log out';
-                    //
-                    //         Messages.user({ name : Session.get('nickname')});
-                    //         console.log("User:" +Session.get('nickname') );
-                    //         $uibModalInstance.close();
-                    //
-                    //         $uibModal.open({
-                    //             templateUrl: 'login_success.html',
-                    //             controller: 'login_success_ctrl'
-                    //
-                    //         })
-                    //     }
                 })
         }
     }
@@ -801,10 +840,19 @@ app.controller('login_modal_instance_ctrl', function (Messages,Session,$scope, $
 
 });
 
-app.controller('login_success_ctrl', function ($scope, $uibModalInstance, $state, $rootScope) {
+app.controller('login_success_ctrl', function (Messages,$http,$scope, $uibModalInstance, $state, $rootScope) {
 
     $rootScope.reg = '';
     $rootScope.chatValue=true;
+    $rootScope.chatboxValue=true;
+
+    $http.post("checkChat.php", {
+        'user': Messages.user().id
+    })
+        .then(function (data) {
+            console.log("datara");
+            console.log(data);
+        });
 
     $scope.exit = function () {
     console.log("login state: "+$rootScope.currentState);
@@ -817,6 +865,8 @@ app.controller('logout_success_ctrl', function ($scope, $uibModalInstance, $stat
 
     $rootScope.reg = 'Register';
     $rootScope.chatValue=false;
+    $rootScope.chatboxValue=false;
+    $rootScope.chatShow=false;
 
     $scope.exit = function () {
         console.log("login state: "+$rootScope.currentState);

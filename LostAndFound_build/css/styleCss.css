@@ -2,7 +2,75 @@
 .fa {
     color:#fff;
 }
+a{
+    cursor: pointer;
+}
+.chat{
+    position:fixed;
 
+    padding-top: 5px;
+    font-weight: bold;
+    top:90%;
+    left:80%;
+    width:200px;
+    height:30px;
+    background: yellow;
+    transition: 0.5s;
+
+}
+.collapsed-chat{
+
+    background: white;
+
+}
+.chat-box{
+
+    position:fixed;
+    border-radius: 3px;
+    /*padding-top: 5px;*/
+    font-weight: bold;
+    top:50%;
+    left:80%;
+    width:200px;
+    height:300px;
+    background: white;
+
+
+
+}
+.chat-available-users{
+    position: absolute;
+    background: whitesmoke;
+    height: 300px;
+    width: 100px;
+    right:200px;
+
+
+}
+.chat-box-messages{
+    position: absolute;
+    height: 220px;
+    padding-right: 20px;
+   width:100%;
+    /*top:60%;*/
+    overflow-y:scroll;
+    background:white;
+}
+.my-chat-messages{
+    position: absolute;
+    margin-top:230px;
+    height:30px;
+    /*height:auto;*/
+    width:100%;
+    background: whitesmoke;
+}
+.submit-chat{
+    position: relative;
+    height:30px;
+    width:100px;
+    top:88%;
+    background:yellow;
+}
 #userList {
     display:none;
 }
